@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="end">
+      <ion-menu-button (click)="clickonmenu()">
+        <img  class="menu-btn" src='../assets/imgs/menu.svg'>
+      </ion-menu-button>
+    </ion-buttons>
+    <img class="enlac-logo" src="../assets/imgs/logo.svg"  routerLink="/home"> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-toolbar color="primary" class="name-toolbar"><ion-title slot="start" class="font-name right-align">John Doe</ion-title> <ion-label class="font-subtoolbar"> Inicio del tratamiento 00/00/0000 </ion-label></ion-toolbar>
+    <div class="border-grid-container">
+    <div class="home-grid bottom-separator border-grid">
+    <div class="section ">
+      <img  class="block check-img icon-margin" src="../assets/imgs/check.svg">
+      <span class="block font-label font-primary">Dosis del día</span></div>
+    <div class="section">
+        <img  class="block check-img icon-margin" src="../assets/imgs/no-check.svg">
+        <span class="block font-label font-primary">Prueba de Laboratorio </span>
+        <span class="block font-subtext font-sub-primary">00/00/000</span>
+
+      </div>
+  </div>
+  <div class="explaintext font-subtext font-sub-primary"> 
+    Recuerda marcar tu toma de medicamento diariamente para llevar control de tusactividades así como acudir a tu laboratorio en la fecha correspondiente a tu tratamiento.
+  </div>
+  <div class="longsection backgroundgray" routerLink="/aprende"> 
+    <div class="iconside"><img  class="block icon-img" src="../assets/imgs/learn.svg"> </div>
+    <div class="longsection-col" > 
+      <span class="font-label font-primary marginb5" >Aprende +</span>
+      <span class="font-subtext font-sub-primary">Te compartimos información relevante para tu salud</span>
+    </div>
+  </div>
+  <div class="home-grid">
+    <div class="section backgroundgray" routerLink="/encuentra"> 
+      <img  class="block icon-img" src="../assets/imgs/location.svg">
+      <span class="block font-label font-primary marginb5">Encuentra tú clínica</span>
+      <span class="block font-subtext font-sub-primary">Ubica rápidamente tu clínica correspondiente.</span>
+    </div>
+    <div class="section backgroundgray" routerLink="/pruebas">
+      <img  class="block icon-img" src="../assets/imgs/lab.svg">
+      <span class="block font-label font-primary marginb5">Tus pruebas de laboratorio</span>
+      <span class="block font-subtext font-sub-primary">Revisa la próxima fecha de tus pruebas.</span>
+    </div>
+    <div class="section backgroundgray" routerLink="/dosis">
+      <img  class="block icon-img" src="../assets/imgs/date.svg">
+      <span class="block font-label font-primary marginb5">Dosis diaria</span>
+      <span class="block font-subtext font-sub-primary">Te ayudamos a registrar la dosis diaria de tu medicamento.</span>
+    </div>
+    <div class="section backgroundgray" routerLink="/alarm">
+      <img  class="block icon-img" src="../assets/imgs/alarm.svg">
+      <span class="block font-label font-primary marginb5">Alarma</span>
+      <span class="block font-subtext font-sub-primary">Activa ó modifica el horario de tu recordatorio de dosis diaria.</span>
+    </div>
+    <div class="section backgroundgray">
+      <img  class="block icon-img" src="../assets/imgs/conf.svg">
+      <span class="block font-label font-primary marginb5">Configuración</span>
+      <span class="block font-subtext font-sub-primary">Actualiza tus datos de registro.</span>
+    </div>
+  </div>
+    </div>
+</ion-content>
+ 

@@ -1,0 +1,527 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/*Fontsitos*/
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+.header-toolbar{
+    height: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 25px;
+}
+
+.page-width{
+  width: 80%;
+  margin-bottom: 100px;
+}
+
+.page_centerer{
+  display: flex;
+  justify-content: center;
+}
+
+.enlac-logo{
+    height: 20px ;
+}
+
+.enlac-menu{
+    background-color: #354F5C;
+    width: 100%;
+}
+
+.menu-btn {
+    height: 68px;
+    position: relative;
+    top: -15px;
+}
+
+.font-secondary{
+  color: #D43045;
+  }
+
+  .font-primary{
+    color:  #386D88;
+  }
+
+  .font-tertiary{
+    color: #6CC365;
+  }
+
+  .font-sub-primary{
+    color:#728A96;
+  }
+
+  .font-bold{
+    font-weight: bold;
+  }
+
+  .font-10{
+    font-size: 12px;
+      }
+
+  .font-12{
+font-size: 12px;
+  }
+
+  .font-14{
+    font-size: 14px;
+  }
+
+  .font-20{
+    font-size: 20px;
+  }
+  
+
+  .bg-secondary{
+    background-color:  #D43045;
+    color:white;
+  }
+
+.name-toolbar{
+    height: 43.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grayfont{
+    color: #728A96;
+}
+
+.list_wrapper{
+  display:flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 20px;
+  
+  @media (min-width: 768px) {
+    min-width: 400px;
+    max-width: 500px;
+  }
+  
+  .list_title img, .list_item .list_bullet{
+    margin-right: 20px;
+  }
+  .list_date span{
+    margin-right: 5px;
+  }
+
+}
+
+.explaintext {
+    padding: 25px 25px;
+    text-align: justify;
+    font-size: 1em;
+}
+
+.backgroundgray {
+    background-color: #F2F5F7;
+    border-radius: 10px;
+}
+
+img.art-img {
+  width: 345px;
+}
+
+.art-img_wrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+.flex_all-centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+ }
+
+
+ .flex_left{
+   display:flex;
+   justify-content: center;
+   align-items: baseline;
+   flex-flow:column;
+ }
+
+ .clinica{
+   display:grid;
+   grid-template-columns: 1fr 1fr;
+
+   button{
+     width: 282.07px;
+     height: 41.4px;
+     font-size: 14px;
+     margin: 5px;
+   }
+
+   .clinica-section{
+     height: 207.4px;
+     span{
+       margin: 3px;
+     }
+   }
+
+   .grid_alarm{
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      .flex_left{
+        padding-left: 20px;
+      }
+   }
+
+  @media (max-width: 768px) {
+    display:flex;
+    flex-flow: column;
+    min-height: 207.4px;
+    .clinica-section{
+      min-height: 100px
+        span{
+          margin: 3px;
+        }
+    }
+   }
+ }
+
+ 
+
+
+ .flex-row{
+   display:flex;
+   flex-flow: row !important;
+ }
+
+ 
+ .flex-col{
+  display:flex;
+  flex-flow: column !important;
+}
+
+
+ 
+  .background_shadow{
+    background-color: #F1F3F4;
+  }
+
+
+.page_banner { /*pagebannerstart*/
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  align-content: center;
+  padding-top: 20px;
+  margin-bottom: 10px;
+
+  .page_banner_block{
+    margin:10px;
+  }
+
+
+  @media (max-width: 425px) {
+    .row{
+      display:block;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 992px) {
+    width: 970px;
+  }
+  @media (min-width: 1200px) {
+    width: 1170px;
+  }
+
+  .row{
+    margin:10px;
+  }
+}  /*pagebannerend*/
+
+@media (max-width: 768px) {
+  .page_banner_block{
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.horizontal-separator{
+  display:block;
+  width: 100%;
+  border-bottom: 1px solid #728A96;
+}
+
+.banner-img{
+  height: 50px;
+}
+
+.title-label{
+  font-size: 20px;
+  color: #386D88;
+  font-weight: bold;
+}
+
+.banner-subtext{
+  color:#728A96;
+    font-size: 12px;
+    text-align: justify;
+    font-weight: normal;
+    line-height : 15px;
+}
+
+.menu-grid{
+    margin-top: 20px;
+    padding-left: 20px;
+    /*display: grid;*/
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 16px;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.home-grid, .menu-grid{
+    margin-top: 20px;
+    padding-left: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 16px;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.home-grid .section, .menu-grid .section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    min-height: 135.24px;
+    /*margin: 15px 0px;*/
+}
+
+.border-grid-container {
+    margin-right: auto;
+    margin-left: auto;
+    @media (min-width: 992px) {
+      width: 970px;
+    }
+    @media (min-width: 1200px) {
+      width: 1170px;
+    }
+  }
+
+  .topdownbordered{
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+  }
+
+  .margin-pit{
+    margin-bottom: 55px !important;
+  }
+
+.border-grid .section{
+    padding: 3rem;
+    text-align: center;
+    border-top: 1px solid #dfdfdf;
+  
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .home-grid .section{
+    padding: 3rem;
+    text-align: center;
+    margin:5px;
+  }
+  
+  @media (min-width: 768px) {
+    .border-grid  {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-gap: 5px;
+    }
+    .border-grid .section {
+      border-top: 1px solid #dfdfdf;
+      border-left: 1px solid #dfdfdf;
+      &:nth-child(-n + 2) {
+        border-top: none;
+      }
+      &:nth-child(odd) {
+        border-left: none;
+      }
+    }
+
+    .home-grid  {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-gap: 5px
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .border-grid .section {
+      border-top: 1px solid #dfdfdf;
+      border-left: 1px solid #dfdfdf;
+      &:nth-child(-n + 2) {
+        border-top: 1px solid #dfdfdf;
+      }
+      &:nth-child(odd) {
+        border-left: 1px solid #dfdfdf;
+      }
+      &:nth-child(-n + 3) {
+        border-top: none;
+      }
+      &:first-child,
+      &:nth-child(3n + 1) {
+        border-left: none;
+      }
+    }
+
+    .home-grid .section {
+    }
+
+  }
+
+.home-grid .separator{
+    border-right: 1px solid #D8DFE2;
+}
+
+.bottom-separator{
+    border-bottom: 1px solid #D8DFE2;
+}
+
+
+.block{
+    display: block;
+}
+
+
+
+.font-label{
+    font-size: 12px;
+    font-weight: bold;
+    line-height : 15px;
+    text-align: left;
+   
+}
+
+
+
+.font-subtext{
+   
+    font-size: 10px;
+    text-align: center;
+    font-weight: normal;
+    line-height : 11px;
+}
+
+.font-name{
+    color:#FFFFFF;
+    font-size: 14px;
+    line-height: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+
+.right-align{
+    text-align: right;
+    margin-right: 10px;
+}
+
+.font-subtoolbar{
+    color:#FFFFFF;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: left;
+    font-weight: normal;
+}
+
+.icon-margin{
+    margin-bottom: 13px;
+}
+
+.icon-img {
+    height: 40.37px;
+}
+
+.icon-img {
+    height: 27px;
+}
+
+.longsection {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0px 20px;
+    min-height:135.24px;
+}
+
+.small-longsection{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0px 20px;
+  min-height:50px;
+}
+
+.longsection-col{
+    display: flex;
+    flex-flow: column;
+    margin-left: 20px;
+}
+
+.marginb5{
+    margin-bottom:5px;
+}
+
+.marginb10{
+  margin-bottom: 10px;
+}
+
+.marginr10{
+  margin-right: 10px;
+}
+.x-img{
+  height: 15px;
+}
+ion-menu{
+    --width:100%;
+    --background:#3B5562;
+    top:68px;
+}
+
+
+

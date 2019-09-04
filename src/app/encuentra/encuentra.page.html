@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar class="header-toolbar">
+      <ion-buttons slot="end">
+        <ion-menu-button (click)="clickonmenu()">
+          <img  class="menu-btn" src='../assets/imgs/menu.svg'>
+        </ion-menu-button>
+      </ion-buttons>
+      <img class="enlac-logo" src="../assets/imgs/logo.svg"  routerLink="/home">
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-justify-content-center">
+      <ion-toolbar color="primary" class="name-toolbar"><ion-title slot="start" class="font-name right-align">John Doe</ion-title> <ion-label class="font-subtoolbar"> Inicio del tratamiento 00/00/0000 </ion-label></ion-toolbar>
+    <div class="page_centerer">
+      <div class="page-width">
+      <div class="page_banner">
+        <div class="page_banner_block"><img  class="block banner-img" src="../assets/imgs/location.svg"> </div>
+        <div class="page_banner_block col" > 
+          <span class="title-label row" >Encuentra tu clínica</span>
+          <span class="banner-subtext row font-sub-primary">Te ayudamos a localizar tu clínica correspondiente, si tienes algún inconveniente, <span class="font-secondary">contacta
+              con tu asesor</span> para que te oriente.
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clinica ">
+    <div class="background_shadow flex_all-centered clinica-section " >
+      <span class="section font-primary font-14 font-bold"> Tu clínica de primer nivel es</span>
+      <span class="section font-secondary font-20 font-bold"> Nombre de la Clínica</span>
+    </div>
+    <div class="flex_all-centered clinica-section">
+        <span class="banner-subtext row font-sub-primary font-12">Calle #333, col. Nombre, c.p. 0000, del. Nombre, Cd. De México</span>
+        <span class="font-secondary font-bold row font-14">Tel: 00-00-0000</span>
+        <button class="bg-secondary font-14"> Abrir en Maps </button>
+    </div>
+    </div>
+
+    <div class="clinica ">
+        <div class="background_shadow flex_all-centered clinica-section " >
+          <span class="section font-primary font-14 font-bold"> Tu clínica de segundo nivel es</span>
+          <span class="section font-secondary font-20 font-bold"> Nombre de la Clínica</span>
+        </div>
+        <div class="flex_all-centered clinica-section">
+            <span class="banner-subtext row font-sub-primary font-12">Calle #333, col. Nombre, c.p. 0000, del. Nombre, Cd. De México</span>
+            <span class="font-secondary font-bold row font-14">Tel: 00-00-0000</span>
+            <button class="bg-secondary font-14"> Abrir en Maps </button>
+        </div>
+        </div>
+
+
+
+</ion-content>

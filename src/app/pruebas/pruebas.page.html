@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar class="header-toolbar">
+      <ion-buttons slot="end">
+        <ion-menu-button (click)="clickonmenu()">
+          <img  class="menu-btn" src='../assets/imgs/menu.svg'>
+        </ion-menu-button>
+      </ion-buttons>
+      <img class="enlac-logo" src="../assets/imgs/logo.svg"  routerLink="/home">
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-justify-content-center">
+      <ion-toolbar color="primary" class="name-toolbar"><ion-title slot="start" class="font-name right-align">John Doe</ion-title> <ion-label class="font-subtoolbar"> Inicio del tratamiento 00/00/0000 </ion-label></ion-toolbar>
+    <div class="page_centerer">
+      <div class="page-width">
+      <div class="page_banner">
+        <div class="page_banner_block"><img  class="block banner-img" src="../assets/imgs/lab.svg"> </div>
+        <div class="page_banner_block col" > 
+          <span class="title-label row" >Tus pruebas de laboratorio</span>
+          <span class="banner-subtext row font-sub-primary">Aquí registramos tus pruebas de laboratorio para ayudarte a mantener el progreso de tu tratamiento, si por alguna razón no has podido asistir a tus pruebas <span class="font-secondary">contacta con tu
+              asesor</span> para que te oriente.
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clinica">
+      <div class="background_shadow grid_alarm clinica-section " >
+        <span class="flex_left" >
+        <span class="section font-primary font-14 font-bold">Proxima prueba</span>
+        <span class="section  font-20 font-bold"> <span class="font-secondary">00/00/0000</span> <span class="font-primary">00:00 xm</span>  </span>
+        </span>
+        <span class="flex_all-centered">
+            <img  class="block icon-img" src='../assets/imgs/alarm.svg'>
+            <span class="font-sub-primary font-10">Activar alerta</span>
+        </span>
+      </div>
+      <div class="flex_all-centered clinica-section">
+          <span class="font-sub-primary font-bold font-14">Nombre del laboratorio asignado</span>
+          <span class="banner-subtext row font-sub-primary font-12">Calle #333, col. Nombre, c.p. 0000, del. Nombre, Cd. De México</span>
+          <span class="font-secondary font-bold row font-14">Tel: 00-00-0000</span>
+          <button class="bg-secondary font-14 "> Abrir en Maps </button>
+      </div>
+      </div>
+      <div class="page_centerer">
+         
+      <div class="list_wrapper">
+        <ion-toolbar class="list_item font-14 font-primary font-bold list_title">  <img  class="bullet-img" src='../assets/imgs/history.svg' slot="start"> Historial de pruebas</ion-toolbar>
+        <ion-toolbar class="list_item">
+          <span slot="start" class="list_bullet">01</span>
+          <span class="list_date"> <span class="font-secondary font-bold">00/00/0000</span> <span class="font-primary font-bold">00:00 xm</span> </span>
+          <img  class="bullet-img" src='../assets/imgs/check.svg' slot="end">
+        </ion-toolbar>
+      </div>
+    
+  </div>
+</ion-content>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47" height="12" viewBox="0 0 47 12">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="47" height="12" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="pass-placeholder" clip-path="url(#clip-path)">
+    <text id="_" data-name="●●●●●●●" transform="translate(0 10)" fill="#376d88" font-size="11" font-family="ArialMT, Arial"><tspan x="0" y="0">●●●●●●●</tspan></text>
+  </g>
+</svg>
