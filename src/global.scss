@@ -104,10 +104,8 @@ font-size: 12px;
   }
 
 .name-toolbar{
-    height: 43.5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 46.5px;
+  text-align: center;
 }
 
 .grayfont{
@@ -160,7 +158,6 @@ img.art-img {
   justify-content: center;
   flex-flow: column;
  }
-
 
  .flex_left{
    display:flex;
@@ -307,7 +304,8 @@ img.art-img {
     align-items: stretch;
 }
 
-.home-grid, .menu-grid{
+.home-grid .menu-grid{
+  
     margin-top: 20px;
     padding-left: 20px;
     grid-template-columns: 1fr 1fr;
@@ -363,6 +361,7 @@ img.art-img {
   }
   
   @media (min-width: 768px) {
+    
     .border-grid  {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -380,6 +379,7 @@ img.art-img {
     }
 
     .home-grid  {
+      //background-color: #6CC365;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-gap: 5px
@@ -445,9 +445,9 @@ img.art-img {
 
 .font-name{
     color:#FFFFFF;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 15px;
-    text-align: left;
+    margin: 0 5px;
     font-weight: bold;
 }
 
@@ -459,10 +459,11 @@ img.art-img {
 
 .font-subtoolbar{
     color:#FFFFFF;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 15px;
     text-align: left;
     font-weight: normal;
+    margin: 0 5px;
 }
 
 .icon-margin{
