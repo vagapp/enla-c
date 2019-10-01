@@ -51,14 +51,15 @@
 }
 
 .enlac-menu{
-    background-color: #354F5C;
+    /*background-color: #354F5C;*/
+    background-color: rgba(53,79,92,0.5);
     width: 100%;
 }
 
 .menu-btn {
-    height: 68px;
+    height: 100%;
     position: relative;
-    top: -15px;
+    /*top: -15px;*/
 }
 
 .font-secondary{
@@ -100,6 +101,11 @@ font-size: 12px;
 
   .bg-secondary{
     background-color:  #D43045;
+    color:white;
+  }
+
+  .bg-tertiary{
+    background-color:  #6CC365;
     color:white;
   }
 
@@ -520,9 +526,16 @@ img.art-img {
 }
 ion-menu{
     --width:100%;
-    --background:#3B5562;
+    /*--background:#3B5562;*/
+    --background: rgba(59,85,98, 0.85);
     top:68px;
 }
 
+.modalCss .modal-wrapper {
+  opacity: 0.85 !important;
+}
 
+.modalCss .sc-ion-modal-ios{
+  background: rgba(59,85,98, 2);
+}
 

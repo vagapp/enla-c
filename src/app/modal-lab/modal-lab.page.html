@@ -12,21 +12,21 @@
       <ion-row>
         <div class="page_banner">
           <div class="page_banner_block">
-            <img  class="block banner-img" src="../assets/imgs/alarm.svg"> 
+            <img  class="block banner-img" src="../assets/imgs/lab.svg"> 
           </div>
           <div class="page_banner_block col" >
-            <span class="title-label row">Activar alerta</span>
+            <span class="title-label row">¿Realizaste la prueba de laboratorio?</span>
+            <span class="banner-subtext row font-sub-primary">00/00/00        
+            </span>
           </div>
         </div>
       </ion-row>
       <ion-row>
         <div class="gray">
           <div class="flex_all-centered clinica-section">
-            <button class="font-201">1 Hora antes</button>
+            <button class="font-20">Aún no es tiempo de realizar esta prueba, regresa cuando la fecha sea correcta</button>
             <br>
-            <button class="bg-tertiary font-20"><img class="icon-button" src="../assets/imgs/palomita.svg">  Activar </button>
-            <br>
-            <button class="bg-secondary font-20"><img class="icon-button" src="../assets/imgs/x.svg"> Desactivar </button>
+            <span class="title-label-href row" (click)="navegar('/pruebas')">Ver registro completo   &nbsp; &nbsp;<img class="icon-button" src="../assets/imgs/chevron.svg"></span>
           </div>
         </div>
       </ion-row>

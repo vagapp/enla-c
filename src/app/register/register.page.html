@@ -1,0 +1,87 @@
+
+  <ion-row>
+    <div class="head-logo">
+      <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
+    </div>
+    <ion-segment>
+      <ion-segment-button class="no-borderradius checked">
+        <ion-label>Registro</ion-label>
+      </ion-segment-button>
+      <ion-segment-button class="no-borderradius">
+        <ion-label>Ingresa</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-row>
+ 
+  <ion-content class="ion-justify-content-center">
+    <ion-row justify-content-center>
+      <ion-col align-self-center>
+        <div padding>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">NOMBRE COMPLETO</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">CORREO</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">CONTRASEÑA</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">CONFIRMAR CONTRASEÑA</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">FECHA DE NACIMIENTO</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">SEXO</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">INSTITUCIÓN</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="ion-item-color-border">
+              <ion-label position="floating" class="label-size">INICIO DEL TRATAMIENTO</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list class="list-height">
+            <ion-item class="no-border-item">
+              <br>
+              <ion-checkbox color="danger" class="check-style"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text">términos de uso</span> y la <span class="secondary-text-big">política de privacidad</span></p>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div padding>
+          <ion-button size="large" color="secondary" expand="block">Registro</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center class="row-bottom">
+      <ion-col (click)="navegar('/aprende')" align-self-center class="align-center-span">
+        <span class="blue">¿Ya tienes cuenta?</span>
+        <br><br>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+  

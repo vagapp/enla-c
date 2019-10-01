@@ -21,7 +21,10 @@ const routes: Routes = [
   { path: 'alert', loadChildren: './alert/alert.module#AlertPageModule' },
   { path: 'dosis', loadChildren: './dosis/dosis.module#DosisPageModule' },
   { path: 'alarma', loadChildren: './alarma/alarma.module#AlarmaPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'modal-alarm', loadChildren: './modal-alarm/modal-alarm.module#ModalAlarmPageModule' },
+  { path: 'modal-lab', loadChildren: './modal-lab/modal-lab.module#ModalLabPageModule' }
+
 ];
 
 @NgModule({

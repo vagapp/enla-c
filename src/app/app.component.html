@@ -1,42 +1,93 @@
 <ion-app>
-  
     <ion-menu side="end" type="overlay" style="width: 100%" (clickOutside)="onClickedOutside($event)" (click)="logclick()">
-      <ion-content  class="enlac-menu" color="--menu-background">
-      <div class="border-grid-container">
-       <div class="menu-grid border-grid">
-          <div class="section">
-              <img  class="block icon-img marginb10" src="../assets/imgs/learn.svg">
-              <span class="block font-name">Aprende +</span>
-              </div>
-        <div class="section">
-          <img  class="block icon-img marginb10" src="../assets/imgs/location.svg">
-          <span class="block font-name">Encuentra tú clínica</span>
-          </div>
-          <div class="section">
-              <img  class="block icon-img marginb10" src="../assets/imgs/lab.svg">
-              <span class="block font-name">Tus pruebas de laboratorio </span>
-              </div>
-              <div class="section">
-                  <img  class="block icon-img marginb10" src="../assets/imgs/date.svg">
-                  <span class="block font-name ">Dosis diaria
-                    </span>
-                  </div>
-                  <div class="section">
-                      <img  class="block icon-img marginb10" src="../assets/imgs/alarm.svg">
-                      <span class="block font-name">Alarma</span>
-                      </div>
-                      <div class="section">
-                          <img  class="block icon-img marginb10" src="../assets/imgs/conf.svg">
-                          <span class="block font-name">Configuración</span>
-                          </div>
-       </div>
-       <div class="small-longsection topdownbordered margin-pit">
-          <img  class="block x-img marginr10" src="../assets/imgs/x.svg" >
-          <span class="block font-name">Cerrar Sesión</span>
-       </div>
-      </div>
-      </ion-content>
+        <ion-content  class="enlac-menu" color="--menu-background">
+            <ion-grid class="margin-toop">
+                <ion-row class="borders-bottom">
+                    <ion-col class="border-riight">
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/learn.svg">
+                            <span class="block font-name center">Aprende +</span>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/location.svg">
+                            <span class="block font-name center">Encuentra tú clínica</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="borders-bottom">
+                    <ion-col class="border-riight">
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/lab.svg">
+                            <span class="block font-name center">Tus pruebas de laboratorio </span>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/date.svg">
+                            <span class="block font-name center">Dosis diaria</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="borders-bottom">
+                    <ion-col class="border-riight">
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/alarm.svg">
+                            <span class="block font-name center">Alarma</span>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/conf.svg">
+                            <span class="block font-name center">Configuración</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="small-longsection topdownbordered margin-pit">
+                            <img  class="block x-img marginr10" src="../assets/imgs/x-red.svg" >
+                            <span class="block font-name">Cerrar Sesión</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <!-- <div class="border-grid-container">
+                <div class="menu-grid border-grid">
+                    <div class="section">
+                        <img  class="block icon-img marginb10" src="../assets/imgs/learn.svg">
+                        <span class="block font-name">Aprende +</span>
+                    </div>
+                    <div class="section">
+                        <img  class="block icon-img marginb10" src="../assets/imgs/location.svg">
+                        <span class="block font-name">Encuentra túuu clínica</span>
+                    </div>
+                    <div class="section">
+                        <img  class="block icon-img marginb10" src="../assets/imgs/lab.svg">
+                        <span class="block font-name">Tus pruebas de laboratorio </span>
+                    </div>
+                    <div class="section">
+                        <img  class="block icon-img marginb10" src="../assets/imgs/date.svg">
+                        <span class="block font-name ">Dosis diaria</span>
+                    </div>
+                    <div class="section">
+                        <img  class="block icon-img marginb10" src="../assets/imgs/alarm.svg">
+                        <span class="block font-name">Alarma</span>
+                    </div>
+                    <div class="section">
+                        <img  class="block icon-img marginb10" src="../assets/imgs/conf.svg">
+                        <span class="block font-name">Configuración</span>
+                    </div>
+                </div>
+                <div class="small-longsection topdownbordered margin-pit">
+                    <img  class="block x-img marginr10" src="../assets/imgs/x.svg" >
+                    <span class="block font-name">Cerrar Sesión</span>
+                </div>
+            </div> -->
+        </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
-  
 </ion-app>

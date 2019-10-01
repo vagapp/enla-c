@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
-  selector: 'app-alert',
-  templateUrl: './alert.page.html',
-  styleUrls: ['./alert.page.scss'],
+  selector: 'app-modal-alarm',
+  templateUrl: './modal-alarm.page.html',
+  styleUrls: ['./modal-alarm.page.scss'],
 })
-export class AlertPage implements OnInit {
+export class ModalAlarmPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
@@ -20,5 +20,10 @@ export class AlertPage implements OnInit {
   async closeModal() {
     const onClosedData: string = "Wrapped Up!";
     await this.modalController.dismiss(onClosedData);
+  }
+
+  navegar(url){
+    this.closeModal();
+    this.router.navigateByUrl(url);
   }
 }
