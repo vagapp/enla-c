@@ -11,6 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { ClickOutsideModule } from 'ng-click-outside';
 
+import { ModalAlarmPageModule } from './modal-alarm/modal-alarm.module';
+import { ModalLabPageModule } from './modal-lab/modal-lab.module';
+import { AlertPageModule } from './alert/alert.module';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,7 +23,10 @@ import { ClickOutsideModule } from 'ng-click-outside';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    ModalAlarmPageModule,
+    ModalLabPageModule,
+    AlertPageModule
   ],
   providers: [
     StatusBar,
