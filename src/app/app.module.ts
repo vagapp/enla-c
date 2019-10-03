@@ -14,6 +14,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { ModalAlarmPageModule } from './modal-alarm/modal-alarm.module';
 import { ModalLabPageModule } from './modal-lab/modal-lab.module';
 import { AlertPageModule } from './alert/alert.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { AlertPageModule } from './alert/alert.module';
     ClickOutsideModule,
     ModalAlarmPageModule,
     ModalLabPageModule,
-    AlertPageModule
+    AlertPageModule,
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
