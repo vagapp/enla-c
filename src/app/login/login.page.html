@@ -3,11 +3,11 @@
     <div class="head-logo">
       <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
     </div>
-    <ion-segment>
-      <ion-segment-button class="no-borderradius">
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button class="no-borderradius" value="register">
         <ion-label>Registro</ion-label>
       </ion-segment-button>
-      <ion-segment-button class="no-borderradius checked">
+      <ion-segment-button class="no-borderradius checked" value="login">
         <ion-label>Ingresa</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -21,14 +21,14 @@
             <br><br>
             <ion-list>
               <ion-item class="ion-item-color-border">
-                <ion-input formControlName="email" color="primary" type="text" placeholder="mimail@example.com" required="true" class="margin-start-input">
+                <ion-input formControlName="email" color="primary" type="text" placeholder="mail@example.com" required="true" class="margin-start-input">
                   <ion-icon name="mail" slot="start" align-self-center class="margin-icon"></ion-icon>
                 </ion-input>
               </ion-item>
             </ion-list>
             <ion-list>
               <ion-item class="ion-item-color-border">
-                <ion-input formControlName="password"  color="primary" type="password" placeholder="mimail@example.com" required="true" class="margin-start-input">
+                <ion-input formControlName="password"  color="primary" type="password" placeholder="password" required="true" class="margin-start-input">
                   <ion-icon name="lock" slot="start" align-self-center class="margin-icon"></ion-icon>
                 </ion-input>
               </ion-item>

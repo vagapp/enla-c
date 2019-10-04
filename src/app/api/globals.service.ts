@@ -47,15 +47,4 @@ export class GlobalsService {
       )
     );
   }
-
-  async presentAlert(HEADER,SUBHEADER,MESSAGE) {
-    const alert = await this.alertController.create({
-      header: HEADER,
-      subHeader: SUBHEADER,
-      message: MESSAGE,
-      buttons: ['Aceptar']
-    });
-
-    await alert.present();
-  }
 }

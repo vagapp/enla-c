@@ -18,6 +18,8 @@ export class LoginPage implements OnInit {
     password: new FormControl(null,Validators.required)
   });
 
+  action : string = "login"; 
+
   constructor(
     public router: Router,
     public co: CommonService,
@@ -28,21 +30,24 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   navegar(url){
-    //console.log("hola");
     this.router.navigateByUrl(url);
   }
 
-  doLogin(data){
-    console.log("quien soy", data.email,data.password);
+  doLogin(data: any){
+    if(data.email == null){
+      this.co.presentAlert('Error','Por favor ingresa tu email.',"");
+      return;
+    }
+    if(data.password == null){
+      this.co.presentAlert('Error','Por favor ingresa tu password.',"");
+      return;
+    }
     this.global.showLoader();
-    
     this.US.login(data.email,data.password).subscribe(
       (res:any) => { 
         this.global.hideLoader();
-        
         this.US.account = res;
-
-        console.log("respuesta ", this.US.account);
+        console.log("respuesta ", res);
         this.co.setRoot('/home');
       },
       (err: HttpErrorResponse) => { 
@@ -57,4 +62,7 @@ export class LoginPage implements OnInit {
     );
   }
 
+  segmentChanged(ev: any) {
+      this.co.setRoot('/'+ev.detail.value);
+  } 
 }

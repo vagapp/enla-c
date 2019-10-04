@@ -4,26 +4,22 @@ import { map } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import {GlobalsService} from '../api/globals.service';
-declare var window: any;
-declare var document: Document;
-declare var Tawk_API: any;
 
 export interface Account{
+  current_user: CurrentUser;
   csrf_token: string;
   logout_token: string;
-  current_user: CurrentUser;
   temp_login: boolean;
 }
 export interface CurrentUser{
-  name: string;
-  roles: Array<string>;
   uid: string;
-  user_picture: string;
+  name: string;
+  sexo: Array<string>;
   email: string;
   fullname: string;
-  vision: string;
-  sexo:Array<string>;
-  edad:string;
+  institucion: Array<string>;
+  fecha_nacimiento: string;
+  fecha_inicio_tratamiento: string;
 }
 
 @Injectable({
@@ -33,7 +29,6 @@ export interface CurrentUser{
 export class UserService {
   private _account:Account;
   private _playerID:string = 'null';
-  tawkId: string = '5ce57b9dd07d7e0c6394e428';
 
   get account(): Account{
     return this._account;
@@ -68,7 +63,7 @@ export class UserService {
     );
   }
 
-  login(username,password){
+  login(username : string, password : string){
     let headers = new HttpHeaders({
       'Content-Type':  'application/json',
     });
@@ -81,7 +76,7 @@ export class UserService {
       "pass":password
     };
     return this.http.post<Account>(
-      this.global.API+'user/login?_format=json',
+      this.global.API+'user/clogin?_format=json',
       JSON.stringify(datos),
       { headers: headers, withCredentials: true }).pipe(
         map(
@@ -96,7 +91,7 @@ export class UserService {
   }
   logout(){
     return this.http.get<Account>(
-      'user/clogout?_format=json',
+      this.global.API+'user/clogout?_format=json',
       { withCredentials: true }).pipe(
         map(
           res => { 
