@@ -51,7 +51,7 @@ export class UserService {
     public global : GlobalsService
   ) { }
   getLoginStatus(){
-    return this.http.get<Account>('user/me/'+this.playerID+'?_format=json',{ withCredentials: true }).pipe(
+    return this.http.get<Account>(this.global.API+'user/me/'+this.playerID+'?_format=json',{ withCredentials: true }).pipe(
       map(
         res => { 
           return res;
@@ -128,7 +128,7 @@ export class UserService {
       pr.push({ "target_id":value });
     });*/
     let datos = {
-      "name": [{ "value":name }],
+      "name": [{ "value":mail }],
       "mail": [{ "value":mail }],
       "pass": [{ "value":pass }],
       "field_fecha_de_nacimiento": [{ "value":field_fecha_de_nacimiento }],

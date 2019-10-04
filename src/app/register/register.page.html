@@ -78,20 +78,20 @@
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">CÓDIGO POSTAL</ion-label>
-                <ion-input formControlName="cp" #cp type="text" ngModel required (ionChange)="searchCP(cp.value)"></ion-input>
+                <ion-input formControlName="cp" #cp type="text" ngModel required (input)="searchCP(cp.value)"></ion-input>
                 <!-- <ion-icon name="search" slot="end" align-self-center class="margin-icon" (click)="searchCP(cp.value)"></ion-icon> -->
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">MUNICIPIO</ion-label>
-                <ion-input formControlName="municipio" type="text" ngModel disabled value="{{municipio}}"></ion-input>
+                <ion-input formControlName="municipio" type="text" [(ngModel)]="municipio" disabled></ion-input>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">ESTADO</ion-label>
-                <ion-input formControlName="estado" type="text" ngModel disabled value="{{estado}}"></ion-input>
+                <ion-input formControlName="estado" type="text" [(ngModel)]="estado" disabled></ion-input>
               </ion-item>
             </ion-list> 
             <ion-list class="list-height">
@@ -116,7 +116,7 @@
       </ion-col>
     </ion-row>
     <ion-row justify-content-center class="row-bottom">
-      <ion-col (click)="navegar('/aprende')" align-self-center class="align-center-span">
+      <ion-col (click)="co.go('/aprende')" align-self-center class="align-center-span">
         <span class="blue">¿Ya tienes cuenta?</span>
         <br><br>
       </ion-col>

@@ -22,7 +22,9 @@ import { DatePipe } from '@angular/common';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'ios',
+    }),
     AppRoutingModule,
     ClickOutsideModule,
     ModalAlarmPageModule,
