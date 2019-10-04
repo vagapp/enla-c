@@ -15,7 +15,7 @@ import { ModalAlarmPageModule } from './modal-alarm/modal-alarm.module';
 import { ModalLabPageModule } from './modal-lab/modal-lab.module';
 import { AlertPageModule } from './alert/alert.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
