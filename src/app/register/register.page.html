@@ -3,73 +3,108 @@
     <div class="head-logo">
       <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
     </div>
-    <ion-segment>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button class="no-borderradius checked" value="register">
+        <ion-label>Registro</ion-label>
+      </ion-segment-button>
+      <ion-segment-button class="no-borderradius" value="login">
+        <ion-label>Ingresa</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+    <!-- <ion-segment>
       <ion-segment-button class="no-borderradius checked">
         <ion-label>Registro</ion-label>
       </ion-segment-button>
       <ion-segment-button class="no-borderradius">
         <ion-label>Ingresa</ion-label>
       </ion-segment-button>
-    </ion-segment>
+    </ion-segment> -->
   </ion-row>
  
   <ion-content class="ion-justify-content-center">
     <ion-row justify-content-center>
       <ion-col align-self-center>
-        <form #form="ngForm" method="post">
+        <form [formGroup]="register_data"  (ngSubmit)="register(register_data.value)">
           <div padding>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">NOMBRE COMPLETO</ion-label>
-                <ion-input></ion-input>
+                <ion-input formControlName="name" type="text" ngModel required></ion-input>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">CORREO</ion-label>
-                <ion-input></ion-input>
+                <ion-input formControlName="mail" type="email" ngModel required></ion-input>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">CONTRASEÑA</ion-label>
-                <ion-input></ion-input>
+                <ion-input formControlName="pass" type="password" ngModel required></ion-input>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">CONFIRMAR CONTRASEÑA</ion-label>
-                <ion-input></ion-input>
+                <ion-input formControlName="pass1" type="password" ngModel required></ion-input>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">FECHA DE NACIMIENTO</ion-label>
-                <ion-input></ion-input>
+                <ion-datetime  formControlName="fecha_nacimiento" ngModel></ion-datetime>
+                <!-- <ion-input formControlName="fecha_nacimiento" type="text" ngModel required></ion-input> -->
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">SEXO</ion-label>
-                <ion-input></ion-input>
+                <ion-select formControlName="sexo" [(ngModel)]="sexo">
+                    <ion-select-option *ngFor="let item of sexosData" value="{{item.tid}}">{{item.name}}</ion-select-option>
+                </ion-select>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">INSTITUCIÓN</ion-label>
-                <ion-input></ion-input>
+                <ion-select formControlName="institucion" [(ngModel)]="institucion">
+                    <ion-select-option *ngFor="let item of institutoData" value="{{item.tid}}">{{item.name}}</ion-select-option>
+                </ion-select>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
+                <ion-label position="floating" class="label-size">CÓDIGO POSTAL</ion-label>
+                <ion-input formControlName="cp" #cp type="text" ngModel required (ionChange)="searchCP(cp.value)"></ion-input>
+                <!-- <ion-icon name="search" slot="end" align-self-center class="margin-icon" (click)="searchCP(cp.value)"></ion-icon> -->
+              </ion-item>
+            </ion-list>
+            <ion-list class="list-height">
+              <ion-item class="ion-item-color-border">
+                <ion-label position="floating" class="label-size">MUNICIPIO</ion-label>
+                <ion-input formControlName="municipio" type="text" ngModel disabled value="{{municipio}}"></ion-input>
+              </ion-item>
+            </ion-list>
+            <ion-list class="list-height">
+              <ion-item class="ion-item-color-border">
+                <ion-label position="floating" class="label-size">ESTADO</ion-label>
+                <ion-input formControlName="estado" type="text" ngModel disabled value="{{estado}}"></ion-input>
+              </ion-item>
+            </ion-list> 
+            <ion-list class="list-height">
+              <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">INICIO DEL TRATAMIENTO</ion-label>
-                <ion-input></ion-input>
+                <ion-datetime  formControlName="fecha_inicio" ngModel></ion-datetime>
+                <!-- <ion-input formControlName="fecha_inicio" type="text" ngModel required></ion-input> -->
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="no-border-item">
                 <br>
-                <ion-checkbox color="danger" class="check-style"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text">términos de uso</span> y la <span class="secondary-text-big">política de privacidad</span></p>
+                <ion-checkbox color="danger" class="check-style" formControlName="condiciones" checked="false"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text">términos de uso</span> y la <span class="secondary-text-big">política de privacidad</span></p>
               </ion-item>
             </ion-list>
           </div>

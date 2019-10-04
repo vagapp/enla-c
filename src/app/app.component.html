@@ -3,13 +3,13 @@
         <ion-content  class="enlac-menu" color="--menu-background">
             <ion-grid class="margin-toop">
                 <ion-row class="borders-bottom">
-                    <ion-col class="border-riight">
+                    <ion-col class="border-riight" routerLink="/aprende" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/learn.svg">
                             <span class="block font-name center">Aprende +</span>
                         </div>
                     </ion-col>
-                    <ion-col>
+                    <ion-col routerLink="/encuentra" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/location.svg">
                             <span class="block font-name center">Encuentra tú clínica</span>
@@ -18,13 +18,13 @@
                 </ion-row>
 
                 <ion-row class="borders-bottom">
-                    <ion-col class="border-riight">
+                    <ion-col class="border-riight" routerLink="/pruebas" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/lab.svg">
                             <span class="block font-name center">Tus pruebas de laboratorio </span>
                         </div>
                     </ion-col>
-                    <ion-col>
+                    <ion-col routerLink="/dosis" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/date.svg">
                             <span class="block font-name center">Dosis diaria</span>
@@ -33,13 +33,13 @@
                 </ion-row>
 
                 <ion-row class="borders-bottom">
-                    <ion-col class="border-riight">
+                    <ion-col class="border-riight" routerLink="/alarma" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/alarm.svg">
                             <span class="block font-name center">Alarma</span>
                         </div>
                     </ion-col>
-                    <ion-col>
+                    <ion-col routerLink="/configuracion" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/conf.svg">
                             <span class="block font-name center">Configuración</span>

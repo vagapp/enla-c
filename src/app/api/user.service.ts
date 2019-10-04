@@ -63,7 +63,98 @@ export class UserService {
     );
   }
 
-  login(username : string, password : string){
+  loadsexos(){
+    return this.http.get<Account>(
+      this.global.API+'/api/sexos?_format=json',
+      { withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+
+  loadinsti(){
+    return this.http.get<Account>(
+      this.global.API+'/api/instituciones?_format=json',
+      { withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+  loadcps(cp){
+    cp = (cp == '') ? 0 : cp;
+    return this.http.get<Account>(
+      this.global.API+'/postal_codes/'+cp,
+      { withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+
+
+  register(name:string, mail:string, pass:string, field_fecha_de_nacimiento:string, field_inicio_del_tratamiento:string, field_institucion:string, field_nombre_completo:string, field_sexo:string, field_codigo_postal:string){
+    
+    let headers = new HttpHeaders({
+      'Content-Type':  'application/json',
+    });
+    var sx = [];
+    let sex = field_sexo.split(',');
+    sex.forEach(value => {
+      sx.push({ "target_id":value });
+    });
+    /*var pr = [];
+    let pro = programas.split(',');
+    pro.forEach(value => {
+      pr.push({ "target_id":value });
+    });*/
+    let datos = {
+      "name": [{ "value":name }],
+      "mail": [{ "value":mail }],
+      "pass": [{ "value":pass }],
+      "field_fecha_de_nacimiento": [{ "value":field_fecha_de_nacimiento }],
+      "field_inicio_del_tratamiento": [{ "value":field_inicio_del_tratamiento }],
+      "field_institucion": [{ "target_id":field_institucion }],
+      "field_nombre_completo": [{ "value":field_nombre_completo }],
+      "field_sexo":sx,
+      "field_codigo_postal": [{ "value":field_codigo_postal }]
+    };
+    //console.log(datos);
+    return this.http.post<Account>(
+      this.global.API+'user/register?_format=json',
+      JSON.stringify(datos),
+      { headers: headers, withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+  login(username,password){
     let headers = new HttpHeaders({
       'Content-Type':  'application/json',
     });
