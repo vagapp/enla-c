@@ -43,7 +43,7 @@ export class AppComponent {
 
 
   onClickedOutside(e: Event) {
-    console.log('Clicked outside:', e);
+    //console.log('Clicked outside:', e);
     this.menuctrl.close();
 
   }
