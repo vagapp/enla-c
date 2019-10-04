@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dosis.page.scss'],
 })
 export class DosisPage implements OnInit {
-
+  date: any;
   constructor() { }
 
   ngOnInit() {

@@ -35,6 +35,10 @@ export class RegisterPage implements OnInit {
   estado: '';
   aceptaBand: false;
 
+  sexo: any;
+  institucion: any;
+
+
   constructor(
     private US: UserService,
     private datePipe: DatePipe,
@@ -89,7 +93,7 @@ export class RegisterPage implements OnInit {
               res => { 
                 console.log(res);
                 this.global.hideLoader();
-                this.co.setRoot('/home');
+                this.co.setRoot('/login');
               },
               (err: HttpErrorResponse) => { 
                 console.log(err);
@@ -126,9 +130,6 @@ export class RegisterPage implements OnInit {
   segmentChanged(ev: any) {
     this.co.setRoot('/'+ev.detail.value);
   }
-
-
-
   searchCP(valor){
     console.log(valor);
     this.US.loadcps(valor).subscribe(
@@ -142,13 +143,4 @@ export class RegisterPage implements OnInit {
       }
     );
   }
-
-
-
-
-
-
-
-
-
 }

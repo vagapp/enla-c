@@ -7,6 +7,7 @@ import { MenuController } from '@ionic/angular';
 import { UserService } from '../app/api/user.service';
 import { CommonService } from '../app/app/common.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { GlobalsService } from './api/globals.service';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ export class AppComponent {
     private router : Router,
     public menuctrl:MenuController,
     public US: UserService,
-    public co: CommonService
+    public co: CommonService,
+    public globals: GlobalsService
   ) {
     this.initializeApp();
   }
@@ -42,8 +44,23 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.router.navigateByUrl('/login');
       this.splashScreen.hide();
+      this.US.getLoginStatus().subscribe(
+        (res:any) => { 
+          if(res.current_user === null){
+            this.co.setRoot('/login');
+            this.splashScreen.hide();
+          }else{
+            this.US.account = res;
+            this.co.setRoot('/home');
+          }
+          
+          this.statusBar.styleDefault();
+        },
+        (err: HttpErrorResponse) => { 
+          this.co.presentAlert('Error','¡UPS!, tuvimos un provema verificando tu sesión!',err.error.message);
+        }
+      );
     });
   }
 
@@ -58,14 +75,17 @@ export class AppComponent {
   }
 
   doLogout(){
+    this.globals.showLoader();
     this.US.logout().subscribe(
       (res:any) => { 
+        this.globals.hideLoader();
         this.US.account = res;
         console.log("respuesta ", res);
         this.onClickedOutside(null);
         this.co.setRoot('/login');
       },
       (err: HttpErrorResponse) => { 
+        this.globals.hideLoader();
         console.log(err);
         var message = err.error.message;//'Intenta de nuevo';
         if(err.status == 400){
