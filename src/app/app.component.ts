@@ -52,7 +52,7 @@ export class AppComponent {
             this.splashScreen.hide();
           }else{
             this.US.account = res;
-            this.co.setRoot('/home');
+            //this.co.setRoot('/home');
           }
           
           this.statusBar.styleDefault();

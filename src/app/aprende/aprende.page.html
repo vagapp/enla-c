@@ -11,15 +11,24 @@
 
 <ion-content class="ion-justify-content-center">
   <ion-toolbar color="primary" class="name-toolbar">
-    <ion-label class="font-name">Juan Carlos</ion-label>
-    <ion-label class="font-subtoolbar">Inicio del tratamiento 00/00/0000</ion-label>
+    <ion-label class="font-name">{{name_head}}</ion-label>
+    <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
   </ion-toolbar>
-  <!-- <ion-toolbar color="primary" class="name-toolbar">
-    <ion-title slot="start" class="font-name right-align">John Doe</ion-title>
-    <ion-label class="font-subtoolbar"> Inicio del tratamiento 00/00/0000 </ion-label>
-  </ion-toolbar> -->
+  
+  <div *ngFor="let item of articleData">
+    <ion-card (click)="openPDF(item.field_pdf);" >
+      <img src="{{item.field_image}}" />
+      <ion-card-header>
+        <ion-card-subtitle>{{item.created}}</ion-card-subtitle>
+        <ion-card-title>{{item.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{item.body}}
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-  <div class="page_centerer">
+  <!-- <div class="page_centerer">
     <div class="page-width">
     <div class="page_banner">
       <div class="page_banner_block"><img  class="block banner-img" src="../assets/imgs/learn.svg"> </div>
@@ -39,7 +48,7 @@
 
       </div>
     </div>
-    </div>
+    </div> -->
  
  
 </ion-content>

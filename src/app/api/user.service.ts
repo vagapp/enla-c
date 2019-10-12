@@ -16,6 +16,7 @@ export interface CurrentUser{
   name: string;
   sexo: Array<string>;
   email: string;
+  codigo_postal: string;
   fullname: string;
   institucion: Array<string>;
   fecha_nacimiento: string;
@@ -27,7 +28,7 @@ export interface CurrentUser{
 })
 
 export class UserService {
-  private _account:Account;
+  public _account:Account;
   private _playerID:string = 'null';
 
   get account(): Account{
@@ -98,6 +99,79 @@ export class UserService {
     cp = (cp == '') ? 0 : cp;
     return this.http.get<Account>(
       this.global.API+'/postal_codes/'+cp,
+      { withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+  loadarticles(){
+    return this.http.get<Account>(
+      this.global.API+'/api/articulos?_format=json',
+      { withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+  loadclinic(institucion, cp){
+    
+    return this.http.get<Account>(
+      this.global.API+'/instituciones_cercanas',
+      { withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+
+  registerdosis(title:string, field_fecha_de_dosis:string){
+    
+    let headers = new HttpHeaders({
+      'Content-Type':  'application/json',
+      'X-CSRF-Token': this.account.csrf_token
+    });
+    
+    let datos = {
+      "type":[{"target_id": "dosis_diaria"}],
+      "title":[{"value": title}],
+      "field_fecha_de_dosis":[{"value":field_fecha_de_dosis}]
+    };
+    return this.http.post<Account>(
+      this.global.API+'node?_format=json',
+      JSON.stringify(datos),
+      { headers: headers, withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+          }
+        )
+      );
+  }
+
+  loaddosis(){
+    
+    return this.http.get<Account>(
+      this.global.API+'api/dosis?_format=json',
       { withCredentials: true }).pipe(
         map(
           res => { 
@@ -241,52 +315,48 @@ export class UserService {
     await alert.present();
   }
 
-  updateUserData(info:any, programas:any, chgpass:boolean){
+  updateUserData(info:any, chgpass:boolean){
     let headers = new HttpHeaders({
       'Content-Type':  'application/json',
       'X-CSRF-Token': this.account.csrf_token
     });
-    let data : any;    
+    let data : any;
+    var sx = [];
+    let sex = info.field_sexo.split(',');
+    sex.forEach(value => {
+      sx.push({ "target_id":value });
+    });
+    
     if(chgpass){
       data = {
-        "field_nombre":[
-           {"value": info.nombre }
-         ],
-        "field_edad":[
-           {"value":info.edad}
-        ],
-        "field_sexo":[
-          {"target_id": info.sexo }
-        ],
-        "mail":[
-          {"value":info.email}
-        ],
+        "name": [{ "value": info.mail }],
+        "mail": [{ "value": info.mail }],
+        "field_fecha_de_nacimiento": [{ "value": info.field_fecha_de_nacimiento }],
+        "field_inicio_del_tratamiento": [{ "value": info.field_inicio_del_tratamiento }],
+        "field_institucion": [{ "target_id": info.field_institucion }],
+        "field_nombre_completo": [{ "value": info.field_nombre_completo }],
+        "field_sexo":sx,
+        "field_codigo_postal": [{ "value":info.field_codigo_postal }],
         "pass": [
           {"existing":info.currentPassword, "value": info.password}
-        ],
-        "field_programas": programas
+        ]
       };
     }else{
       data = {
-        "field_nombre":[
-           {"value": info.nombre }
-         ],
-        "field_edad":[
-           {"value":info.edad}
-        ],
-        "field_sexo":[
-          {"target_id": info.sexo }
-        ],
-        "mail":[
-          {"value":info.email}
-        ],
-        "field_programas": programas
+        "name": [{ "value": info.mail }],
+        "mail": [{ "value": info.mail }],
+        "field_fecha_de_nacimiento": [{ "value": info.field_fecha_de_nacimiento }],
+        "field_inicio_del_tratamiento": [{ "value": info.field_inicio_del_tratamiento }],
+        "field_institucion": [{ "target_id": info.field_institucion }],
+        "field_nombre_completo": [{ "value": info.field_nombre_completo }],
+        "field_sexo":sx,
+        "field_codigo_postal": [{ "value":info.field_codigo_postal }],
       };
     }
     
     //console.log("DATA",data)
     return this.http.patch<any>(
-      'user/'+this.account.current_user.uid+'?_format=json',
+      this.global.API+'user/'+this.account.current_user.uid+'?_format=json',
       JSON.stringify(data),
       { headers: headers, withCredentials: true }).pipe(
         map(
