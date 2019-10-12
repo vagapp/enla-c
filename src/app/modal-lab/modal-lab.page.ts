@@ -9,9 +9,11 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class ModalLabPage implements OnInit {
 
+  fecha_param: any =this.nav.get('fecha_param');
   constructor(
     private modalController: ModalController,
-    public router: Router
+    public router: Router,
+    public nav : NavParams,
   ) { }
 
   ngOnInit() {
