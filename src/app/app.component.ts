@@ -47,12 +47,12 @@ export class AppComponent {
       this.splashScreen.hide();
       this.US.getLoginStatus().subscribe(
         (res:any) => { 
-          if(res.current_user === null){
+          if(res.current_user == null){
             this.co.setRoot('/login');
             this.splashScreen.hide();
           }else{
             this.US.account = res;
-            //this.co.setRoot('/home');
+            this.co.setRoot('/home');
           }
           
           this.statusBar.styleDefault();
