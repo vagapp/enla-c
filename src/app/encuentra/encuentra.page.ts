@@ -20,7 +20,7 @@ export class EncuentraPage implements OnInit {
   constructor(
     private US: UserService,
     private datePipe: DatePipe,
-    private DomSanitizer: DomSanitizer
+    public DomSanitizer: DomSanitizer
   ) {
     
    }

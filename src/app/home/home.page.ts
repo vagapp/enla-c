@@ -39,25 +39,28 @@ export class HomePage {
   ngOnInit() {
     this.US.getLoginStatus().subscribe(
       res => { 
-        this.name_head = res.current_user.fullname;
-        this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
+        this.US.account = res;
+        if(this.US.account.current_user != null){
+          this.name_head = this.US.account.current_user.fullname;
+          this.date_head = this.datePipe.transform(this.US.account.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
+          this.global.showLoader();
+          this.pruebasServ.getPruebasMed().subscribe(result =>{
+            this.global.hideLoader();
+            if(result.length > 0){
+              console.log("pruebas lista",result);
+              this.selectedDate = this.recuperaPruebaHoy(result);
+            }
+            
+          },(err:HttpErrorResponse) => {
+            this.global.hideLoader();
+            this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
+          });
+        }
       },
       (err: HttpErrorResponse) => { 
         console.log(err);
       }
     );
-    this.global.showLoader();
-    this.pruebasServ.getPruebasMed().subscribe(result =>{
-      this.global.hideLoader();
-      if(result.length > 0){
-        console.log("pruebas lista",result);
-        this.selectedDate = this.recuperaPruebaHoy(result);
-      }
-      
-    },(err:HttpErrorResponse) => {
-      this.global.hideLoader();
-      this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
-    })
   }
 
   recuperaPruebaHoy(pruebas:any){
