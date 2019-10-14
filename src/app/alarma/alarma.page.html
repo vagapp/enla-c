@@ -1,50 +1,53 @@
 <ion-header>
-    <ion-toolbar class="header-toolbar">
-      <ion-buttons slot="end">
-        <ion-menu-button>
-          <img  class="menu-btn" src='../assets/imgs/menu.svg'>
-        </ion-menu-button>
-      </ion-buttons>
-      <img class="enlac-logo" src="../assets/imgs/logo.svg"  routerLink="/home">
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content class="ion-justify-content-center">
-    <ion-toolbar color="primary" class="name-toolbar">
-      <ion-label class="font-name">{{name_head}}</ion-label>
-      <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
-    </ion-toolbar>
-    <ion-grid class="margin-toop">
-      <ion-row>
-        <div class="page_banner">
-          <div class="page_banner_block">
-            <img  class="block banner-img" src="../assets/imgs/alarm.svg"> 
-          </div>
-          <div class="page_banner_block col" >
-            <span class="title-label row">Alarma</span>
-            <span class="banner-subtext row font-sub-primary">Te asismos en la toma de tu medicamento con una alarma personalizada para recordarte diariamente y no pierdas tu tratamiento                
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="end">
+      <ion-menu-button>
+        <img  class="menu-btn" src='../assets/imgs/menu.svg'>
+      </ion-menu-button>
+    </ion-buttons>
+    <img class="enlac-logo" src="../assets/imgs/logo.svg"  routerLink="/home">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-justify-content-center">
+  <ion-toolbar color="primary" class="name-toolbar">
+    <ion-label class="font-name">Juan Carlos</ion-label>
+    <ion-label class="font-subtoolbar">Inicio del tratamiento 00/00/0000</ion-label>
+  </ion-toolbar>
+  <ion-grid class="margin-toop">
+    <ion-row>
+      <div class="page_banner">
+        <div class="page_banner_block">
+          <img  class="block banner-img" src="../assets/imgs/alarm.svg"> 
+        </div>
+        <div class="page_banner_block col" >
+          <span class="title-label row">Alarma</span>
+          <span class="banner-subtext row font-sub-primary">Te asistimos en la toma de tu medicamento con una alarma personalizada para recordarte diariamente y no pierdas tu tratamiento                
+          </span>
+        </div>
+      </div>
+    </ion-row>
+    <ion-row>
+        <div class="clinica gray">
+          <div class="background_shadow grid_alarm">
+            <span class="flex_left" >
+              <span class="section font-primary font-14 font-bold">Hora de la alarma diaria</span>
+              <span class="section  font-20 font-bold">
+                <span class="font-primary">{{horaAlarma}} {{format}}</span>  
+                <ion-icon class="create-btn"style="color:#D43045" name="create" (click)="openModal()"></ion-icon>
+              </span>
+            </span>
+            <span class="flex_all-centered" >
+              <img *ngIf="status" class="block icon-img" src='../assets/imgs/alarm.svg' (click)="actualizaAlarma(false)">
+              <img *ngIf="!status  && !isNew" class="block icon-img" src='../assets/imgs/alarm-G.svg' (click)="actualizaAlarma(true)">
+              <img *ngIf="!status && isNew" class="block icon-img" src='../assets/imgs/alarm-G.svg'>
+              <span *ngIf="status" class="font-sub-primary font-10">Desactivar alarma</span>
+              <span *ngIf="!status" class="font-sub-primary font-10">Activar alarma</span>
             </span>
           </div>
         </div>
       </ion-row>
-      <ion-row>
-          <div class="clinica gray">
-            <div class="background_shadow grid_alarm">
-              <span class="flex_left" >
-                <span class="section font-primary font-14 font-bold">Hora de la alarma diaria</span>
-                <span class="section  font-20 font-bold">
-                  <span class="font-primary">00:00 xm</span>  
-                </span>
-              </span>
-              <span class="flex_all-centered">
-                <img  class="block icon-img" src='../assets/imgs/alarm.svg'>
-                <span class="font-sub-primary font-10">Activar alerta</span>
-              </span>
-            </div>
-          </div>
-        </ion-row>
-      
-    </ion-grid>
+    
+  </ion-grid>
 
-  </ion-content>
-  
+</ion-content>

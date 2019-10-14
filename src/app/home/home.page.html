@@ -28,11 +28,12 @@
             </div>
           </ion-col>
           <ion-col>
-            <div (click)="openModal2()">
-                <img  class="icon-notify-margin" src="../assets/imgs/no-check.svg">
+            <div>
+                <img *ngIf="statusPrueba" class="icon-notify-margin" src="../assets/imgs/check.svg" (click)="marcarPrueba(false)">
+                <img *ngIf="!statusPrueba" class="icon-notify-margin" src="../assets/imgs/no-check.svg" (click)="marcarPrueba(true)">
                 <br><br>
                 <span class="block font-label font-primary center">Prueba de Laboratorio </span>
-                <span class="block font-subtext font-sub-primary center">00/00/000</span>
+                <span class="block font-subtext font-sub-primary center">{{selectedDate| date:'dd/MM/yyyy'}}</span>
             </div>
           </ion-col>
         </ion-row>

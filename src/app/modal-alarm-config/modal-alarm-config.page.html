@@ -1,0 +1,33 @@
+<ion-content padding color="--menu-background">
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="close">
+        <ion-button (click)="closeModal()">X</ion-button>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <div class="page_banner">
+        <div class="page_banner_block">
+          <img  class="block banner-img" src="../assets/imgs/alarm-w.svg"> 
+        </div>
+        <div class="page_banner_block col" >
+          <span class="title-label row">Activar alerta</span> 
+        </div>
+      </div>
+    </ion-row>
+    <ion-row>
+      <div class="gray">
+        <div class="flex_all-centered clinica-section">
+          <ion-datetime class="color" displayFormat="HH:mm a" placeholder="00:00 xm" [(ngModel)]="selectedDate" (ionChange)="parseDate()"></ion-datetime>
+          <br>
+          <button class="bg-tertiary font-20" (click)="crearAlarma()"><img class="icon-button" src="../assets/imgs/palomita.svg">Guardar</button>
+          <br>
+          <button class="bg-secondary font-20" (click)="closeModal()" ><img class="icon-button" src="../assets/imgs/x.svg"> Cancelar</button>
+          <br>
+        </div>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

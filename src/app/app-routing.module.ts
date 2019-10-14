@@ -21,10 +21,12 @@ const routes: Routes = [
   { path: 'alert', loadChildren: './alert/alert.module#AlertPageModule' },
   { path: 'dosis', loadChildren: './dosis/dosis.module#DosisPageModule' },
   { path: 'alarma', loadChildren: './alarma/alarma.module#AlarmaPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'modal-alarm', loadChildren: './modal-alarm/modal-alarm.module#ModalAlarmPageModule' },
   { path: 'modal-lab', loadChildren: './modal-lab/modal-lab.module#ModalLabPageModule' },
-  { path: 'configuracion', loadChildren: './configuracion/configuracion.module#ConfiguracionPageModule' }
+  { path: 'configuracion', loadChildren: './configuracion/configuracion.module#ConfiguracionPageModule' },
+  { path: 'modal-alarm-config', loadChildren: './modal-alarm-config/modal-alarm-config.module#ModalAlarmConfigPageModule' }
 
 ];
 
