@@ -11,8 +11,8 @@
 
 <ion-content class="ion-justify-content-center">
   <ion-toolbar color="primary" class="name-toolbar">
-    <ion-label class="font-name">Juan Carlos</ion-label>
-    <ion-label class="font-subtoolbar">Inicio del tratamiento 00/00/0000</ion-label>
+    <ion-label class="font-name">{{name_head}}</ion-label>
+    <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
   </ion-toolbar>
   <ion-grid class="margin-toop">
     <ion-row>
@@ -34,8 +34,9 @@
           <span class="flex_left" >
             <span class="section font-primary font-14 font-bold">Proxima prueba</span>
             <span class="section  font-20 font-bold"> 
-              <span class="font-secondary">00/00/0000</span> 
-              <span class="font-primary">00:00 xm</span>  
+                <ion-datetime class="color" displayFormat="DD/MM/YYYY HH:mm a" placeholder="00/00/0000 00:00 xm" [(ngModel)]="selectedDate"  (ngModelChange)="dateChanged()"></ion-datetime>
+              <!--span class="font-secondary">00/00/0000</span> 
+              <span class="font-primary">00:00 xm</span>  -->
             </span>
           </span>
           <span class="flex_all-centered" (click)="openModal3()">
@@ -46,7 +47,7 @@
       </div>
     </ion-row>
     <ion-row>
-      <div class="clinica gray">
+      <div class="clinica gray" *ngIf="anyClinica">
         <div class="flex_all-centered clinica-section">
           <span class="font-sub-primary font-bold font-14">Nombre del laboratorio asignado</span>
           <span class="banner-subtext row font-sub-primary font-12">Calle #333, col. Nombre, c.p. 0000, del. Nombre, Cd. De México</span>
@@ -60,30 +61,16 @@
         <ion-toolbar class="list_item font-14 font-primary font-bold list_title">  
           <img  class="bullet-img" src='../assets/imgs/history.svg' slot="start"> Historial de pruebas
         </ion-toolbar>
-        <ion-toolbar class="list_item bord-bottom">
-          <span slot="start" class="list_bullet">01</span>
+        <ion-toolbar class="list_item bord-bottom" *ngFor="let item of pruebasLista;let indice=index">
+          <span slot="start" class="list_bullet">{{indice+1}}</span>
           <span class="list_date"> 
-            <span class="font-secondary font-bold">00/00/0000</span> 
-            <span class="font-primary font-bold">00:00 xm</span> 
+            <span class="font-secondary font-bold">{{parseTimeTofullDate(item.field_fecha_prueba[0].value) | date:'dd/MM/yyyy'}}</span> 
+            <span class="font-primary font-bold">{{parseTimeToHours(item.field_fecha_prueba[0].value)}}</span> 
           </span>
-          <img  class="bullet-img" src='../assets/imgs/check.svg' slot="end">
+          <img *ngIf="item.field_status_pruebamed[0].value" class="bullet-img" src='../assets/imgs/check.svg' (click)="enableDisable(item.nid[0].value,false,indice)" slot="end">
+          <img *ngIf="!item.field_status_pruebamed[0].value" class="bullet-img" src='../assets/imgs/no-check.svg' (click)="enableDisable(item.nid[0].value,true,indice)" slot="end">
         </ion-toolbar>
-        <ion-toolbar class="list_item bord-bottom">
-          <span slot="start" class="list_bullet">02</span>
-          <span class="list_date"> 
-            <span class="font-secondary font-bold">00/00/0000</span> 
-            <span class="font-primary font-bold">00:00 xm</span> 
-          </span>
-          <img  class="bullet-img" src='../assets/imgs/check.svg' slot="end">
-        </ion-toolbar>
-        <ion-toolbar class="list_item bord-bottom">
-          <span slot="start" class="list_bullet">03</span>
-          <span class="list_date"> 
-            <span class="font-secondary font-bold">00/00/0000</span> 
-            <span class="font-primary font-bold">00:00 xm</span> 
-          </span>
-          <img  class="bullet-img" src='../assets/imgs/check.svg' slot="end">
-        </ion-toolbar>
+        
       </div>
     </ion-row>
   </ion-grid>

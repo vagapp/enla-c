@@ -11,8 +11,8 @@
 
 <ion-content class="ion-justify-content-center">
   <ion-toolbar color="primary" class="name-toolbar">
-    <ion-label class="font-name">Juan Carlos</ion-label>
-    <ion-label class="font-subtoolbar">Inicio del tratamiento 00/00/0000</ion-label>
+    <ion-label class="font-name">{{name_head}}</ion-label>
+    <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
   </ion-toolbar>
   
   <!-- <ion-toolbar color="primary" class="name-toolbar">
@@ -33,24 +33,30 @@
         </div>
       </div>
     </ion-row>
-    <ion-row>
-      <div class="clinica gray">
-        <div class="background_shadow flex_all-centered clinica-section " >
-          <span class="section font-primary font-14 font-bold"> Tu clínica de primer nivel es</span>
-          <span class="section font-secondary font-20 font-bold"> Nombre de la Clínica</span>
+    <div *ngFor="let item of clinicData">
+      <ion-row>
+        <div class="clinica gray">
+          <div class="background_shadow flex_all-centered clinica-section " >
+            <span class="section font-primary font-14 font-bold"> Tu clínica de {{item.nivel_de_atencion}} es</span>
+            <span class="section font-secondary font-20 font-bold"> {{item.title}}</span>
+          </div>
         </div>
-      </div>
-    </ion-row>
-    <ion-row>
-      <div class="clinica gray">
-        <div class="flex_all-centered clinica-section">
-          <span class="banner-subtext row font-sub-primary font-12">Calle #333, col. Nombre, c.p. 0000, del. Nombre, Cd. De México</span>
-          <span class="font-secondary font-bold row font-14">Tel: 00-00-0000</span>
-          <button class="bg-secondary font-14"> Abrir en Maps </button>
+      </ion-row>
+      <ion-row>
+        <div class="clinica gray">
+          <div class="flex_all-centered clinica-section">
+            <span class="banner-subtext row font-sub-primary font-12">{{item.direccion}}</span>
+            <span class="font-secondary font-bold row font-14">{{item.telefono}}</span>
+            
+            <a [href]="DomSanitizer.bypassSecurityTrustUrl('geo:'+item.latitud+','+item.longitud)" target="_system"><button ion-button small class="bg-secondary font-14">Abrir en Maps</button></a>
+            <!-- <button class="bg-secondary font-14"> Abrir en Maps </button> -->
+          </div>
         </div>
-      </div>
-    </ion-row>
-    <ion-row>
+      </ion-row>
+    </div>
+    
+    
+    <!-- <ion-row>
       <div class="clinica gray">
         <div class="background_shadow flex_all-centered clinica-section " >
           <span class="section font-primary font-14 font-bold"> Tu clínica de segundo nivel es</span>
@@ -66,7 +72,8 @@
           <button class="bg-secondary font-14"> Abrir en Maps </button>
         </div>
       </div>
-    </ion-row>
+    </ion-row> -->
+
   </ion-grid>
     <!-- <div class="page_centerer">
       <div class="page-width">

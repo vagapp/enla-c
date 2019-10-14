@@ -1,34 +1,38 @@
 
   
 <ion-content padding color="--menu-background">
-    <ion-grid>
-  
-      <ion-row>
-        <ion-col class="close">
-          <ion-button (click)="closeModal()">X</ion-button>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row>
-        <div class="page_banner">
-          <div class="page_banner_block">
-            <img  class="block banner-img" src="../assets/imgs/alarm.svg"> 
-          </div>
-          <div class="page_banner_block col" >
-            <span class="title-label row">Activar alerta</span>
-          </div>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="close">
+        <ion-button (click)="closeModal()">X</ion-button>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <div class="page_banner">
+        <div class="page_banner_block">
+          <img  class="block banner-img" src="../assets/imgs/alarm.svg"> 
         </div>
-      </ion-row>
-      <ion-row>
-        <div class="gray">
-          <div class="flex_all-centered clinica-section">
-            <button class="font-201">1 Hora antes</button>
-            <br>
-            <button class="bg-tertiary font-20"><img class="icon-button" src="../assets/imgs/palomita.svg">  Activar </button>
-            <br>
-            <button class="bg-secondary font-20"><img class="icon-button" src="../assets/imgs/x.svg"> Desactivar </button>
-          </div>
+        <div class="page_banner_block col" >
+          <span class="title-label row">Activar alerta</span>
         </div>
-      </ion-row>
-    </ion-grid>
-  </ion-content>
+      </div>
+    </ion-row>
+    <ion-row>
+      <div class="gray">
+        <div class="flex_all-centered clinica-section">
+          <ion-select value="brown" okText="Ok" cancelText="Cancelar" class="font-201" (ionChange)="calculateReminder()"  [(ngModel)]="horasSelect"  placeholder="x Horas antes">
+            <ion-select-option value="1">1 Hora antes</ion-select-option>
+            <ion-select-option value="2">2 Hora antes</ion-select-option>
+            <ion-select-option value="3">3 Hora antes</ion-select-option>
+          </ion-select>
+          <br>
+          <button class="bg-tertiary font-20" (click)="saveReminder()"><img class="icon-button" src="../assets/imgs/palomita.svg" >  Activar </button>
+          <br>
+          <button class="bg-secondary font-20" (click)="closeModal()"><img class="icon-button" src="../assets/imgs/x.svg" > Desactivar </button>
+        </div>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

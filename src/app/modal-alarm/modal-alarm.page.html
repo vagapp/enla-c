@@ -16,7 +16,7 @@
         </div>
         <div class="page_banner_block col" >
           <span class="title-label row">¿Tomaste tu dosis de hoy?</span>
-          <span class="banner-subtext row font-sub-primary">00/00/00 00:00 xm                
+          <span class="banner-subtext row font-sub-primary">{{dateParam}}                
           </span>
         </div>
       </div>
@@ -24,7 +24,7 @@
     <ion-row>
       <div class="gray">
         <div class="flex_all-centered clinica-section">
-          <button class="bg-tertiary font-20"><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya la tomé! </button>
+          <button class="bg-tertiary font-20" (click)="registerAlarm(dateParam)"><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya la tomé! </button>
           <br>
           <button class="bg-secondary font-20"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
           <br>

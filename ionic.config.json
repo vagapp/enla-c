@@ -1,5 +1,7 @@
 {
   "name": "enlac",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -11,8 +11,8 @@
   
   <ion-content class="ion-justify-content-center">
     <ion-toolbar color="primary" class="name-toolbar">
-      <ion-label class="font-name">Juan Carlos</ion-label>
-      <ion-label class="font-subtoolbar">Inicio del tratamiento 00/00/0000</ion-label>
+      <ion-label class="font-name">{{name_head}}</ion-label>
+      <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
     </ion-toolbar>
     <ion-grid class="margin-toop">
       <ion-row>
@@ -36,14 +36,22 @@
             <span class="flex_left" >
               <span class="section font-primary font-14 font-bold">Dosis del día</span>
               <span class="section  font-20 font-bold">
-                <span class="font-primary">00/00/0000</span>
+                <span class="font-primary">{{todayS}}</span>
               </span>
             </span>
           </div>
         </div>
       </ion-row>
       <ion-row>
-          <ion-calendar [(ngModel)]="date" [format]="'YYYY-MM-DD'"></ion-calendar>
+          
+          <ion-calendar 
+          [(ngModel)]="date"
+          (ngModelChange)="onChange($event)"
+          [options]="options"
+          type="string"
+          format="YYYY-MM-DD">
+</ion-calendar>
+          <!-- <ion-calendar [(ngModel)]="dateMulti" (ngModelChange)="onChange($event)" [type]="string" [format]="'YYYY-MM-DD'" [options]="optionsMulti"> </ion-calendar> -->
       </ion-row>
     </ion-grid>
 
