@@ -14,6 +14,7 @@ export interface Account{
 export interface CurrentUser{
   uid: string;
   name: string;
+  lastname: string;
   sexo: Array<string>;
   email: string;
   codigo_postal: string;
@@ -222,7 +223,7 @@ export class UserService {
       );
   }
 
-  register(name:string, mail:string, pass:string, field_fecha_de_nacimiento:string, field_inicio_del_tratamiento:string, field_institucion:string, field_nombre_completo:string, field_sexo:string, field_codigo_postal:string){
+  register(name:string, lastname:string, mail:string, pass:string, field_fecha_de_nacimiento:string, field_inicio_del_tratamiento:string, field_institucion:string, field_nombre_completo:string, field_sexo:string, field_codigo_postal:string){
     
     let headers = new HttpHeaders({
       'Content-Type':  'application/json',
@@ -239,6 +240,7 @@ export class UserService {
     });*/
     let datos = {
       "name": [{ "value":mail }],
+      "field_apellidos": [{ "value":lastname }],
       "mail": [{ "value":mail }],
       "pass": [{ "value":pass }],
       "field_fecha_de_nacimiento": [{ "value":field_fecha_de_nacimiento }],

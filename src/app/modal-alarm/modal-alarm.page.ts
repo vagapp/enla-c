@@ -61,6 +61,7 @@ export class ModalAlarmPage implements OnInit {
         //console.log(res);
         if(this.home)
           this.US.dosisdia = true;
+        this.co.presentAlert('Dosis Registrada','','Tu dosis del día ha quedado registrada, ¡Sigue así!');
         this.closeModal();
         this.global.hideLoader();
         // this.co.setRoot('/login');
@@ -80,7 +81,7 @@ export class ModalAlarmPage implements OnInit {
         if(this.home)
           this.US.dosisdia = false;
         console.log(res);
-        
+        this.co.presentAlert('Registro Eliminado','','Hemos eliminado el registro exitosamente.');
         this.closeModal();
         this.global.hideLoader();
         // this.co.setRoot('/login');

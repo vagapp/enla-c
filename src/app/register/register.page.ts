@@ -18,6 +18,7 @@ export class RegisterPage implements OnInit {
 
   register_data = new FormGroup({
     name: new FormControl(null,Validators.required),
+    lastname: new FormControl(null,Validators.required),
     mail: new FormControl(null,Validators.required),
     pass: new FormControl(null,Validators.required),
     pass1: new FormControl(null,Validators.required),
@@ -76,7 +77,8 @@ export class RegisterPage implements OnInit {
     console.log(values);
 
 
-    if((values.name != null && values.name != '') && 
+    if((values.name != null && values.name != '') &&
+       (values.lastname != null && values.lastname != '') &&  
        (values.mail != null && values.mail != '') && 
        (values.pass != null && values.pass != '') &&
        (values.pass1 != null && values.pass1 != '') && 
@@ -92,7 +94,7 @@ export class RegisterPage implements OnInit {
             var fecha_nac = this.datePipe.transform(values.fecha_nacimiento, 'yyyy-MM-dd');
             var fecha_ini = this.datePipe.transform(values.fecha_inicio, 'yyyy-MM-dd');
             
-            this.US.register(values.name, values.mail, values.pass, fecha_nac, fecha_ini, values.institucion, values.name, values.sexo, values.cp).subscribe(
+            this.US.register(values.name, values.lastname, values.mail, values.pass, fecha_nac, fecha_ini, values.institucion, values.name, values.sexo, values.cp).subscribe(
               res => { 
                 console.log(res);
                 this.global.hideLoader();
