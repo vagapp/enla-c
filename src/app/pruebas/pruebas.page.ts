@@ -24,8 +24,9 @@ export class PruebasPage implements OnInit {
   ultimaPrueba:any;
   selectedDate:any;
   nidProximaPrueba:number;
+  reminderProxPrueba:number;
   isNew:boolean=true;
-
+  reminder:number = 0;
   constructor(
     public modalController: ModalController,
     private US: UserService,
@@ -71,9 +72,11 @@ export class PruebasPage implements OnInit {
   recuperaPruebaHoy(pruebas:any){
     let fechaUltimaPrueba = new Date(parseInt(pruebas[0].field_fecha_prueba[0].value));
     let hoy = new Date();
+
     if(fechaUltimaPrueba >= hoy ){
       this.isNew = false;
       this.nidProximaPrueba = pruebas[0].nid[0].value;
+      this.reminder = pruebas[0].field_hora_reminder.length > 0 ? pruebas[0].field_hora_reminder[0].value : 0;
       this.pruebasLista.shift();
       return fechaUltimaPrueba.toISOString();
     }else{
@@ -87,14 +90,19 @@ export class PruebasPage implements OnInit {
       cssClass: 'modalCss',
       componentProps: { 
         nid_param: this.nidProximaPrueba,
-        fecha_param:this.selectedDate
+        fecha_param:this.selectedDate,
+        reminder_param:this.reminder
       }
     });
  
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
+      console.log("ay0",dataReturned.data.field_hora_reminder.length);
+      if (dataReturned.data.field_hora_reminder.length > 0) {
+//        this.dataReturned = dataReturned.data;
+          this.reminder = dataReturned.data.field_hora_reminder[0].value;
         //alert('Modal Sent Data :'+ dataReturned);
+      }else{
+        this.reminder =0;
       }
     });
  
@@ -129,6 +137,8 @@ export class PruebasPage implements OnInit {
     this.global.showLoader();
     this.pruebasServ.creaPruebaMed(fecha).subscribe(result =>{
       this.global.hideLoader();
+      console.log("res",result['nid'][0].value);
+      this.nidProximaPrueba = result['nid'][0].value;
       this.isNew=false;
       this.ultimaPrueba = result;
       this.presentToast("Se creo exitosamente la prueba");

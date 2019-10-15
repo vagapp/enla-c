@@ -5,6 +5,8 @@ import { GlobalsService } from '../api/globals.service';
 import { CommonService } from '../app/common.service';
 import { UserService } from '../api/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+import { TermscondsPage } from '../termsconds/termsconds.page';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginPage implements OnInit {
 
   login_data = new FormGroup({
     email: new FormControl(null,Validators.required),
-    password: new FormControl(null,Validators.required)
+    password: new FormControl(null,Validators.required),
   });
 
   action : string = "login"; 
@@ -24,10 +26,12 @@ export class LoginPage implements OnInit {
     public router: Router,
     public co: CommonService,
     public global: GlobalsService,
-    public US: UserService
+    public US: UserService,
+    private modalController: ModalController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   navegar(url){
     this.router.navigateByUrl(url);
@@ -45,10 +49,17 @@ export class LoginPage implements OnInit {
     this.global.showLoader();
     this.US.login(data.email,data.password).subscribe(
       (res:any) => { 
-        this.global.hideLoader();
-        this.US.account = res;
-        console.log("respuesta ", res);
-        this.co.setRoot('/home');
+        this.US.getLoginStatus().subscribe(
+          (res:any) => { 
+            this.global.hideLoader();
+            this.US.account = res;
+            console.log("respuesta ", res);
+            this.co.setRoot('/home');
+          },
+          (err: HttpErrorResponse) => { 
+            this.co.presentAlert('Error','¡UPS!, tuvimos un provema verificando tu sesión!',err.error.message);
+          }
+        );
       },
       (err: HttpErrorResponse) => { 
         console.log(err);
@@ -65,4 +76,11 @@ export class LoginPage implements OnInit {
   segmentChanged(ev: any) {
       this.co.setRoot('/'+ev.detail.value);
   } 
+  async openTermCond(id){
+    this.US.nodo = id;
+    const modal = await this.modalController.create({
+      component: TermscondsPage
+    });
+    return await modal.present();
+  }
 }

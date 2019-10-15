@@ -5,6 +5,8 @@ import { GlobalsService } from '../api/globals.service';
 import { CommonService } from '../app/common.service';
 import { UserService } from '../api/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+import { TermscondsPage } from '../termsconds/termsconds.page';
 
 
 @Component({
@@ -43,7 +45,8 @@ export class RegisterPage implements OnInit {
     private US: UserService,
     private datePipe: DatePipe,
     public global: GlobalsService,
-    public co: CommonService
+    public co: CommonService,
+    private modalController: ModalController
   ) {  }
 
   ngOnInit() {
@@ -97,7 +100,7 @@ export class RegisterPage implements OnInit {
               },
               (err: HttpErrorResponse) => { 
                 console.log(err);
-                this.co.presentAlert('Error','','Ocurrió un error inesperado, intenta más tarde');
+                this.co.presentAlert('Error','',err);
                 this.global.hideLoader();
               }
             );
@@ -142,5 +145,12 @@ export class RegisterPage implements OnInit {
         console.log(err);
       }
     );
+  }
+  async openTermCond(id){
+    this.US.nodo = id;
+    const modal = await this.modalController.create({
+      component: TermscondsPage
+    });
+    return await modal.present();
   }
 }

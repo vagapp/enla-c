@@ -30,6 +30,23 @@ export interface CurrentUser{
 export class UserService {
   public _account:Account;
   private _playerID:string = 'null';
+  public _nodo:any = 1;
+  private _dosisdia: boolean = false;
+
+  get nodo():any{
+    return this._nodo;
+  }
+  set nodo(id:any){
+    this._nodo = id;
+  }
+
+  get dosisdia(): boolean{
+    return this._dosisdia;
+  }
+  
+  set dosisdia(dosisdia: boolean){
+    this._dosisdia = dosisdia;
+  }
 
   get account(): Account{
     return this._account;
@@ -126,7 +143,7 @@ export class UserService {
       );
   }
 
-  loadclinic(institucion, cp){
+  loadclinic(){
     
     return this.http.get<Account>(
       this.global.API+'/instituciones_cercanas',
@@ -171,7 +188,7 @@ export class UserService {
   loaddosis(){
     
     return this.http.get<Account>(
-      this.global.API+'api/dosis?_format=json',
+      this.global.API+'api/dosis/'+this.account.current_user.uid+'?_format=json',
       { withCredentials: true }).pipe(
         map(
           res => { 
@@ -184,7 +201,26 @@ export class UserService {
       );
   }
 
-
+  removedosis(nid:string){
+    console.log("remove")
+    let headers = new HttpHeaders({
+      'Content-Type':  'application/json',
+      'X-CSRF-Token': this.account.csrf_token
+    });
+    
+    return this.http.delete(
+      this.global.API+'node/'+nid+'?_format=json',
+      { headers: headers, withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            console.log(err);
+          }
+        )
+      );
+  }
 
   register(name:string, mail:string, pass:string, field_fecha_de_nacimiento:string, field_inicio_del_tratamiento:string, field_institucion:string, field_nombre_completo:string, field_sexo:string, field_codigo_postal:string){
     
@@ -359,6 +395,20 @@ export class UserService {
       this.global.API+'user/'+this.account.current_user.uid+'?_format=json',
       JSON.stringify(data),
       { headers: headers, withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+  termsCond(){
+    return this.http.get<Account>(
+      this.global.API+'node/'+this.nodo+'?_format=json',
+      { withCredentials: true }).pipe(
         map(
           res => { 
             return res;

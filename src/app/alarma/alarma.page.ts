@@ -6,6 +6,8 @@ import { GlobalsService } from '../api/globals.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonService } from '../app/common.service';
 import { ToastController } from '@ionic/angular';
+import { UserService } from '../api/user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-alarma',
@@ -19,15 +21,28 @@ export class AlarmaPage implements OnInit {
   status:boolean = false;
   nid:number;
   isNew:boolean = false;
+  name_head: any;
+  date_head: any;
   constructor(
     public modalController: ModalController,
     public alarmserv : AlarmasService,
+    private datePipe: DatePipe,
     public toastController: ToastController,
+    private US: UserService,
     public co: CommonService,
     public global: GlobalsService) { }
 
   ngOnInit() {
     this.global.showLoader();
+    this.US.getLoginStatus().subscribe(
+      res => { 
+        this.name_head = res.current_user.fullname;
+        this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
     this.alarmserv.getAalarma().subscribe(result =>{
       this.global.hideLoader();
       if(result.length > 0){
@@ -47,6 +62,7 @@ export class AlarmaPage implements OnInit {
 
   actualizaAlarma(status:boolean){
     this.global.showLoader();
+    console.log("NID " + this.nid);
     this.alarmserv.actualizaAlarma(status, this.nid, undefined).subscribe(result =>{
       this.global.hideLoader();
       this.status = result['field_status'][0].value;
@@ -88,10 +104,11 @@ export class AlarmaPage implements OnInit {
  
     modal.onDidDismiss().then((dataReturned) => { 
       if(dataReturned.data != undefined){
-        //console.log("DATA",dataReturned);
+        console.log("DATA",dataReturned);
         this.horaAlarma = dataReturned.data.field_hora_alarma[0].value;
         this.status = dataReturned.data.field_status[0].value;
         this.format = this.setAMPM(this.horaAlarma);
+        this.nid = dataReturned.data.nid[0].value;
       }
 
     });

@@ -1,29 +1,27 @@
-
-  <ion-row>
-    <div class="head-logo">
-      <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
-    </div>
-    <ion-segment (ionChange)="segmentChanged($event)">
-      <ion-segment-button class="no-borderradius checked" value="register">
-        <ion-label>Registro</ion-label>
-      </ion-segment-button>
-      <ion-segment-button class="no-borderradius" value="login">
-        <ion-label>Ingresa</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-
-
-    <!-- <ion-segment>
-      <ion-segment-button class="no-borderradius checked">
-        <ion-label>Registro</ion-label>
-      </ion-segment-button>
-      <ion-segment-button class="no-borderradius">
-        <ion-label>Ingresa</ion-label>
-      </ion-segment-button>
-    </ion-segment> -->
-  </ion-row>
- 
   <ion-content class="ion-justify-content-center">
+    <ion-row class="header-login-register">
+      <div class="head-logo">
+        <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
+      </div>
+      <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button class="no-borderradius checked" value="register">
+          <ion-label>Registro</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="no-borderradius" value="login">
+          <ion-label>Ingresa</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+  
+  
+      <!-- <ion-segment>
+        <ion-segment-button class="no-borderradius checked">
+          <ion-label>Registro</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="no-borderradius">
+          <ion-label>Ingresa</ion-label>
+        </ion-segment-button>
+      </ion-segment> -->
+    </ion-row>
     <ion-row justify-content-center>
       <ion-col align-self-center>
         <form [formGroup]="register_data"  (ngSubmit)="register(register_data.value)">
@@ -104,7 +102,7 @@
             <ion-list class="list-height">
               <ion-item class="no-border-item">
                 <br>
-                <ion-checkbox color="danger" class="check-style" formControlName="condiciones" checked="false"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text">términos de uso</span> y la <span class="secondary-text-big">política de privacidad</span></p>
+                <ion-checkbox color="danger" class="check-style" formControlName="condiciones" checked="false"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text" (click)="openTermCond(1)">términos de uso</span> y la <span class="secondary-text-big" (click)="openTermCond(2)">política de privacidad</span></p>
               </ion-item>
             </ion-list>
           </div>

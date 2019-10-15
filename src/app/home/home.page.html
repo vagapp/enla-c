@@ -22,7 +22,8 @@
         <ion-row class="borders-bottom">
           <ion-col>
             <div class="borders-rigth" (click)="openModal()">
-                <img  class="icon-notify-margin" src="../assets/imgs/no-check.svg">
+                <img  *ngIf="US.dosisdia == true" class="icon-notify-margin" src="../assets/imgs/check.svg">
+                <img  *ngIf="US.dosisdia == false"class="icon-notify-margin" src="../assets/imgs/no-check.svg">
                 <br><br>
                 <span class="block font-label font-primary center">Dosis del día</span>
             </div>
@@ -48,7 +49,7 @@
           
         <ion-row>
           <ion-col>
-            <div class="longsection backgroundgray" routerLink="/aprende">
+            <div class="longsection backgroundgray long" routerLink="/aprende">
               <div class="iconside">
                 <img  class="block icon-img" src="../assets/imgs/learn.svg"> 
               </div>

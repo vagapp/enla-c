@@ -14,6 +14,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { ModalAlarmPageModule } from './modal-alarm/modal-alarm.module';
 import { ModalLabPageModule } from './modal-lab/modal-lab.module';
 import { ModalAlarmConfigPageModule } from './modal-alarm-config/modal-alarm-config.module';
+import { TermscondsPageModule } from './termsconds/termsconds.module';
 import { AlertPageModule } from './alert/alert.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
@@ -21,6 +22,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { DatePipe } from '@angular/common';
+
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +38,7 @@ import { DatePipe } from '@angular/common';
     ModalAlarmPageModule,
     ModalLabPageModule,
     ModalAlarmConfigPageModule,
+    TermscondsPageModule,
     AlertPageModule,
     BrowserModule,
     HttpClientModule
@@ -47,7 +51,8 @@ import { DatePipe } from '@angular/common';
     FileTransfer,
     File,
     FileOpener,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })
