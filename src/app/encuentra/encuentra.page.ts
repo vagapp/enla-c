@@ -28,26 +28,25 @@ export class EncuentraPage implements OnInit {
   ngOnInit() {
     this.US.getLoginStatus().subscribe(
       res => { 
-        this.name_head = res.current_user.fullname;
-        this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
-      },
-      (err: HttpErrorResponse) => { 
-        console.log(err);
-      }
-    );
-
-
-    this.US.loadclinic(7,11410).subscribe(
-      res => { 
-      
-        var count = Object.keys(res).length;
-        
-        for(var i=0; i<count; i++){
-          var telefono = (res[i].telefono != null) ? 'Tel: '+ res[i].telefono : '';
-          res[i].telefono = telefono;
-        }
-        
-        this.clinicData = res;
+        this.US.account = res;
+        this.name_head = this.US.account.current_user.fullname;
+        this.date_head = this.datePipe.transform(this.US.account.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
+        this.US.loadclinic().subscribe(
+          res => { 
+            
+            var count = Object.keys(res).length;
+            
+            for(var i=0; i<count; i++){
+              var telefono = (res[i].telefono != null) ? 'Tel: '+ res[i].telefono : '';
+              res[i].telefono = telefono;
+            }
+            
+            this.clinicData = res;
+          },
+          (err: HttpErrorResponse) => { 
+            console.log(err);
+          }
+        );
       },
       (err: HttpErrorResponse) => { 
         console.log(err);

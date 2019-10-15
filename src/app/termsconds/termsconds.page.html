@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>termsconds</ion-title>
+    <ion-title *ngIf="US.nodo == 1">Términos de uso</ion-title>
+    <ion-title *ngIf="US.nodo == 2">Política de Privacidad</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding [innerHTML]="contenido">
 
 </ion-content>

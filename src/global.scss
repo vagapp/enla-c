@@ -26,7 +26,11 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 /*Fontsitos*/
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap');
+
+html,body{
+  font-family: Lato;
+}
 
 .header-toolbar{
     height: 68px;
@@ -83,19 +87,19 @@
   }
 
   .font-10{
-    font-size: 12px;
-      }
+    font-size: .8rem;
+}
 
   .font-12{
-font-size: 12px;
+font-size: 1rem;
   }
 
   .font-14{
-    font-size: 14px;
+    font-size: 1.2rem;
   }
 
   .font-20{
-    font-size: 20px;
+    font-size: 1.5rem;
   }
   
 
@@ -141,7 +145,7 @@ font-size: 12px;
 .explaintext {
     padding: 25px 25px;
     text-align: justify;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 .backgroundgray {
@@ -179,7 +183,7 @@ img.art-img {
    button{
      width: 282.07px;
      height: 41.4px;
-     font-size: 14px;
+     font-size: 1.2rem;
      margin: 5px;
    }
 
@@ -286,17 +290,17 @@ img.art-img {
 }
 
 .title-label{
-  font-size: 20px;
+  font-size: 1.5rem;
   color: #386D88;
   font-weight: bold;
 }
 
 .banner-subtext{
   color:#728A96;
-    font-size: 12px;
+    font-size: 1rem;
     text-align: justify;
     font-weight: normal;
-    line-height : 15px;
+    line-height : 1em;
 }
 
 .menu-grid{
@@ -432,9 +436,9 @@ img.art-img {
 
 
 .font-label{
-    font-size: 12px;
+    font-size: 1rem;
     font-weight: bold;
-    line-height : 15px;
+    line-height : 1em;
     text-align: left;
    
 }
@@ -443,16 +447,16 @@ img.art-img {
 
 .font-subtext{
    
-    font-size: 10px;
+    font-size: .8rem;
     text-align: center;
     font-weight: normal;
-    line-height : 11px;
+    line-height : 1em;
 }
 
 .font-name{
     color:#FFFFFF;
-    font-size: 15px;
-    line-height: 15px;
+    font-size: 1.2rem;
+    line-height: 1em;
     margin: 0 5px;
     font-weight: bold;
 }
@@ -465,8 +469,8 @@ img.art-img {
 
 .font-subtoolbar{
     color:#FFFFFF;
-    font-size: 13px;
-    line-height: 15px;
+    font-size: 1rem;
+    line-height: 1em;
     text-align: left;
     font-weight: normal;
     margin: 0 5px;
@@ -539,3 +543,18 @@ ion-menu{
   background: rgba(59,85,98, 2);
 }
 
+.header-login-register{
+  background-image: url('assets/imgs/bg-login-fondo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+ion-content{
+  ion-toolbar{
+    ion-label{
+      display: inline-block;
+      width: 100%;
+      text-align: center !important;
+    }
+  }
+}

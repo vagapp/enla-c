@@ -1,19 +1,17 @@
-
-  <ion-row>
-    <div class="head-logo">
-      <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
-    </div>
-    <ion-segment (ionChange)="segmentChanged($event)">
-      <ion-segment-button class="no-borderradius" value="register">
-        <ion-label>Registro</ion-label>
-      </ion-segment-button>
-      <ion-segment-button class="no-borderradius checked" value="login">
-        <ion-label>Ingresa</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-row>
-
   <ion-content class="ion-justify-content-center">
+    <ion-row class="header-login-register">
+      <div class="head-logo">
+        <img src="../assets/imgs/logo-w.svg" class="img-head-logo">
+      </div>
+      <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button class="no-borderradius" value="register">
+          <ion-label>Registro</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="no-borderradius checked" value="login">
+          <ion-label>Ingresa</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
     <form [formGroup]="login_data" (ngSubmit)="doLogin(login_data.value)"> 
       <ion-row justify-content-center>
         <ion-col align-self-center>
@@ -40,8 +38,8 @@
         </ion-col>
       </ion-row>
       <ion-row justify-content-center class="row-bottom">
-        <ion-col (click)="navegar('/aprende')" align-self-center class="align-center-span">
-          <span class="red">Términos de uso </span><span class="red big">Política de privacidad</span>
+        <ion-col align-self-center class="align-center-span">
+          <span class="red" (click)="openTermCond(1)">Términos de uso </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="red big" (click)="openTermCond(2)">Política de privacidad</span>
           <br><br>
           <span class="blue">¿Olvidaste tu contraseña?</span>
           <br><br>

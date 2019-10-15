@@ -36,6 +36,19 @@
 
 .backgroundgray{
   min-height: 115px;
+  .font-subtext{
+    padding-left: .3rem;
+    padding-right: .3rem;
+    padding-bottom: .3rem;
+  }
+}
+.backgroundgray.long{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  .font-subtext{
+    text-align: justify;
+    padding: 0 !important;
+  }
 }
 
 .margin-icon{

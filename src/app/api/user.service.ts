@@ -30,6 +30,14 @@ export interface CurrentUser{
 export class UserService {
   public _account:Account;
   private _playerID:string = 'null';
+  public _nodo:any = 1;
+
+  get nodo():any{
+    return this._nodo;
+  }
+  set nodo(id:any){
+    this._nodo = id;
+  }
 
   get account(): Account{
     return this._account;
@@ -126,7 +134,7 @@ export class UserService {
       );
   }
 
-  loadclinic(institucion, cp){
+  loadclinic(){
     
     return this.http.get<Account>(
       this.global.API+'/instituciones_cercanas',
@@ -359,6 +367,20 @@ export class UserService {
       this.global.API+'user/'+this.account.current_user.uid+'?_format=json',
       JSON.stringify(data),
       { headers: headers, withCredentials: true }).pipe(
+        map(
+          res => { 
+            return res;
+          },
+          (err: HttpErrorResponse) => { 
+            //console.log(err);
+          }
+        )
+      );
+  }
+  termsCond(){
+    return this.http.get<Account>(
+      this.global.API+'node/'+this.nodo+'?_format=json',
+      { withCredentials: true }).pipe(
         map(
           res => { 
             return res;
