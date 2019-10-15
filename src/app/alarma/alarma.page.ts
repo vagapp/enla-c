@@ -62,6 +62,7 @@ export class AlarmaPage implements OnInit {
 
   actualizaAlarma(status:boolean){
     this.global.showLoader();
+    console.log("NID " + this.nid);
     this.alarmserv.actualizaAlarma(status, this.nid, undefined).subscribe(result =>{
       this.global.hideLoader();
       this.status = result['field_status'][0].value;
@@ -103,10 +104,11 @@ export class AlarmaPage implements OnInit {
  
     modal.onDidDismiss().then((dataReturned) => { 
       if(dataReturned.data != undefined){
-        //console.log("DATA",dataReturned);
+        console.log("DATA",dataReturned);
         this.horaAlarma = dataReturned.data.field_hora_alarma[0].value;
         this.status = dataReturned.data.field_status[0].value;
         this.format = this.setAMPM(this.horaAlarma);
+        this.nid = dataReturned.data.nid[0].value;
       }
 
     });

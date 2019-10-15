@@ -23,14 +23,12 @@
       <div class="gray">
         <div class="flex_all-centered clinica-section">
           <ion-select value="brown" okText="Ok" cancelText="Cancelar" class="font-201" (ionChange)="calculateReminder()"  [(ngModel)]="horasSelect"  placeholder="x Horas antes">
-            <ion-select-option value="1" [selected]="horasSelect == 1">1 Hora antes</ion-select-option>
-            <ion-select-option value="2" [selected]="horasSelect == 2">2 Hora antes</ion-select-option>
-            <ion-select-option value="3" [selected]="horasSelect == 3">3 Hora antes</ion-select-option>
+            <ion-select-option [value]="item.id" *ngFor="let item of hourOptions "> {{item.id}} Hora antes</ion-select-option>
           </ion-select>
           <br>
           <button class="bg-tertiary font-20" (click)="saveReminder()"><img class="icon-button" src="../assets/imgs/palomita.svg" >  Activar </button>
           <br>
-          <button class="bg-secondary font-20" (click)="closeModal()"><img class="icon-button" src="../assets/imgs/x.svg" > Desactivar </button>
+          <button class="bg-secondary font-20" (click)="deleteReminder()"><img class="icon-button" src="../assets/imgs/x.svg" > Desactivar </button>
         </div>
       </div>
     </ion-row>

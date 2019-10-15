@@ -24,6 +24,7 @@ export class PruebasPage implements OnInit {
   ultimaPrueba:any;
   selectedDate:any;
   nidProximaPrueba:number;
+  reminderProxPrueba:number;
   isNew:boolean=true;
   reminder:number;
   constructor(
@@ -95,9 +96,13 @@ export class PruebasPage implements OnInit {
     });
  
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
+      console.log("ay0",dataReturned.data.field_hora_reminder.length);
+      if (dataReturned.data.field_hora_reminder.length > 0) {
+//        this.dataReturned = dataReturned.data;
+          this.reminder = dataReturned.data.field_hora_reminder[0].value;
         //alert('Modal Sent Data :'+ dataReturned);
+      }else{
+        this.reminder =0;
       }
     });
  

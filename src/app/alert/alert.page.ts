@@ -18,6 +18,16 @@ export class AlertPage implements OnInit {
   fecha_param: any =this.nav.get('fecha_param');
   fecha_reminder:any;
   reminder_param  = this.nav.get('reminder_param');
+  returnData: any;
+  hourOptions = [ 
+    {
+      id:1
+    },{
+      id:2
+    },{
+      id:3
+    }
+  ];
   constructor(
     private modalController: ModalController,
     public nav : NavParams,
@@ -32,9 +42,10 @@ export class AlertPage implements OnInit {
     console.log("reminder" + this.reminder_param);
     if(this.reminder_param != 0){
       this.selectedReminder();
+    }else{
+
     }
       
-
   }
 
   selectedReminder(){
@@ -46,17 +57,38 @@ export class AlertPage implements OnInit {
   }
 
   calculateReminder(){
+    console.log("fechaparam"+this.fecha_param);
     this.fecha_reminder = new Date(this.fecha_param);
     this.fecha_reminder.setHours(this.fecha_reminder.getHours() - this.horasSelect);
     this.fecha_reminder = this.fecha_reminder.getTime();
   }
 
   saveReminder(){
+    console.log("param"+this.fecha_reminder);
+    if(this.fecha_reminder== undefined){
+      this.calculateReminder();
+    }
     this.global.showLoader();
     this.pruebasServ.updateHorasReminer(this.fecha_reminder.toString(), parseInt(this.nid_param)).subscribe(result =>{
+      console.log("result", result);
+      this.returnData = result;
       this.global.hideLoader();
       this.closeModal();
-      this.presentToast("Se marcó exitosamente la prueba");
+      this.presentToast("Se creo exitosamente la alarma");
+    },(err:HttpErrorResponse) => {
+      this.global.hideLoader();
+      this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
+    })
+  }
+
+  deleteReminder(){
+    this.global.showLoader();
+    this.pruebasServ.updateHorasReminer(null, parseInt(this.nid_param)).subscribe(result =>{
+      console.log("result", result);
+      this.returnData = result;
+      this.global.hideLoader();
+      this.closeModal();
+      this.presentToast("Se eliminó correctamente la alarma");
     },(err:HttpErrorResponse) => {
       this.global.hideLoader();
       this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
@@ -73,7 +105,7 @@ async presentToast(mensaje:string) {
   
 
   async closeModal() {
-    const onClosedData: string = "Wrapped Up!";
-    await this.modalController.dismiss(onClosedData);
+    //const onClosedData: string = "Wrapped Up!";
+    await this.modalController.dismiss(this.returnData);
   }
 }

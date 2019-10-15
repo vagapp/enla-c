@@ -40,8 +40,10 @@
             </span>
           </span>
           <span class="flex_all-centered" (click)="openModal3()">
-            <img  class="block icon-img" src='../assets/imgs/alarm.svg'>
-            <span class="font-sub-primary font-10">Activar alerta</span>
+            <img *ngIf="reminder!=0" class="block icon-img" src='../assets/imgs/alarm.svg'>
+            <img *ngIf="reminder==0" class="block icon-img" src='../assets/imgs/alarm-G.svg'>
+            <span *ngIf="reminder!=0" class="font-sub-primary font-10">Desactivar alerta</span>
+            <span *ngIf="reminder==0" class="font-sub-primary font-10">Activar alerta</span>
           </span>
         </div>
       </div>
