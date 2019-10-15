@@ -6,6 +6,8 @@ import { GlobalsService } from '../api/globals.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonService } from '../app/common.service';
 import { ToastController } from '@ionic/angular';
+import { UserService } from '../api/user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-alarma',
@@ -19,15 +21,28 @@ export class AlarmaPage implements OnInit {
   status:boolean = false;
   nid:number;
   isNew:boolean = false;
+  name_head: any;
+  date_head: any;
   constructor(
     public modalController: ModalController,
     public alarmserv : AlarmasService,
+    private datePipe: DatePipe,
     public toastController: ToastController,
+    private US: UserService,
     public co: CommonService,
     public global: GlobalsService) { }
 
   ngOnInit() {
     this.global.showLoader();
+    this.US.getLoginStatus().subscribe(
+      res => { 
+        this.name_head = res.current_user.fullname;
+        this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
     this.alarmserv.getAalarma().subscribe(result =>{
       this.global.hideLoader();
       if(result.length > 0){

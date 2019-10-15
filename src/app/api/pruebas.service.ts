@@ -23,7 +23,7 @@ export class PruebasService {
       "type":[{"target_id":this.tipo}],
       "title":[{"value":this.US.account.current_user.uid}],
       "field_fecha_prueba":[{"value":date}],
-      "field_status_pruebamed":[{"value":1}]
+      "field_status_pruebamed":[{"value":0}]
     };
     console.log("dats",data);
     return this.http.post(this.global.API+'node?_format=json',

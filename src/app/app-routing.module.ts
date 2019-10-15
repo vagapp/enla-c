@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'modal-alarm', loadChildren: './modal-alarm/modal-alarm.module#ModalAlarmPageModule' },
   { path: 'modal-lab', loadChildren: './modal-lab/modal-lab.module#ModalLabPageModule' },
   { path: 'configuracion', loadChildren: './configuracion/configuracion.module#ConfiguracionPageModule' },
-  { path: 'modal-alarm-config', loadChildren: './modal-alarm-config/modal-alarm-config.module#ModalAlarmConfigPageModule' }
+  { path: 'modal-alarm-config', loadChildren: './modal-alarm-config/modal-alarm-config.module#ModalAlarmConfigPageModule' },  { path: 'termsconds', loadChildren: './termsconds/termsconds.module#TermscondsPageModule' }
+
 
 ];
 

@@ -25,7 +25,7 @@ export class PruebasPage implements OnInit {
   selectedDate:any;
   nidProximaPrueba:number;
   isNew:boolean=true;
-
+  reminder:number;
   constructor(
     public modalController: ModalController,
     private US: UserService,
@@ -71,9 +71,11 @@ export class PruebasPage implements OnInit {
   recuperaPruebaHoy(pruebas:any){
     let fechaUltimaPrueba = new Date(parseInt(pruebas[0].field_fecha_prueba[0].value));
     let hoy = new Date();
+
     if(fechaUltimaPrueba >= hoy ){
       this.isNew = false;
       this.nidProximaPrueba = pruebas[0].nid[0].value;
+      this.reminder = pruebas[0].field_hora_reminder.length > 0 ? pruebas[0].field_hora_reminder[0].value : 0;
       this.pruebasLista.shift();
       return fechaUltimaPrueba.toISOString();
     }else{
@@ -87,7 +89,8 @@ export class PruebasPage implements OnInit {
       cssClass: 'modalCss',
       componentProps: { 
         nid_param: this.nidProximaPrueba,
-        fecha_param:this.selectedDate
+        fecha_param:this.selectedDate,
+        reminder_param:this.reminder
       }
     });
  

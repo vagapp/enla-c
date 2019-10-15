@@ -2,7 +2,7 @@ import { UserService } from '../api/user.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { GlobalsService } from '../api/globals.service';
 import { ModalAlarmPage } from '../modal-alarm/modal-alarm.page';
 import { ModalLabPage } from '../modal-lab/modal-lab.page';
@@ -33,10 +33,11 @@ export class HomePage {
     public pruebasServ : PruebasService,
     public global: GlobalsService,
     public co: CommonService,
-    public toastController: ToastController
-  ) {}
+    public toastController: ToastController,
+    public alertController: AlertController
+    ) {}
   
-  ngOnInit() {
+  ionViewWillEnter() {
     this.US.getLoginStatus().subscribe(
       res => { 
         this.US.account = res;
@@ -62,29 +63,55 @@ export class HomePage {
       }
     );
   }
+  
+  async presentAlertConfirm(data:boolean) {
+    const alert = await this.alertController.create({
+      header: '¿Estas seguro que realizaste tu prueba?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertController.dismiss();
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.enableDisable(this.nidProximaPrueba,data);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   recuperaPruebaHoy(pruebas:any){
     let fechaUltimaPrueba = new Date(parseInt(pruebas[0].field_fecha_prueba[0].value));
     let hoy = new Date();
     if(fechaUltimaPrueba >= hoy ){
-      console.log("mensaje");
       //this.isNew = false;
       this.nidProximaPrueba = pruebas[0].nid[0].value;
       this.puedeMarcarPrueba=false;
       this.statusPrueba = pruebas[0].field_status_pruebamed[0].value; 
       return fechaUltimaPrueba.toISOString();
     }else{
+      this.nidProximaPrueba = pruebas[0].nid[0].value;
+      this.statusPrueba = pruebas[0].field_status_pruebamed[0].value; 
       this.puedeMarcarPrueba=true;
-      return undefined;
+      return fechaUltimaPrueba.toISOString();
     } 
   }
 
   enableDisable(nid:number,status:boolean){
     this.global.showLoader();
      this.pruebasServ.updatePruebasMed(undefined, nid, status).subscribe(result =>{
-       this.global.hideLoader();
-       //this.pruebasLista[index] = result;
-       this.presentToast("Se marcó exitosamente la prueba");
+        this.global.hideLoader();
+        this.statusPrueba = result['field_status_pruebamed'][0].value;
+        //this.pruebasLista[index] = result;
+        this.presentToast("Se marcó exitosamente la prueba");
      },(err:HttpErrorResponse) => {
        this.global.hideLoader();
        this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
@@ -123,10 +150,8 @@ export class HomePage {
   }
 
   marcarPrueba(status:boolean){
-    console.log("se puede?"+this.puedeMarcarPrueba);
     if(this.puedeMarcarPrueba){
-      console.log("guadamesta");
-      this.enableDisable(this.nidProximaPrueba,status);
+      this.presentAlertConfirm(status);
     }else{
       this.openModal2();
     } 

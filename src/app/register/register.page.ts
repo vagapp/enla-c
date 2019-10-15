@@ -97,7 +97,7 @@ export class RegisterPage implements OnInit {
               },
               (err: HttpErrorResponse) => { 
                 console.log(err);
-                this.co.presentAlert('Error','','Ocurrió un error inesperado, intenta más tarde');
+                this.co.presentAlert('Error','',err);
                 this.global.hideLoader();
               }
             );
