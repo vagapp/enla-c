@@ -15,6 +15,11 @@ import { DatePipe } from '@angular/common';
 export class ModalAlarmPage implements OnInit {
 
   dateParam: any;
+  activoSi: boolean;
+  activoNo: boolean;
+  nid: any;
+  home: boolean;
+
   constructor(
     private modalController: ModalController,
     public router: Router,
@@ -28,6 +33,10 @@ export class ModalAlarmPage implements OnInit {
     
     const modalElement = document.querySelector('ion-modal');
     this.dateParam = modalElement.componentProps.Paramdate;
+    this.nid = modalElement.componentProps.nid;
+    this.activoSi = (modalElement.componentProps.activo) ? false : true;
+    this.activoNo = (modalElement.componentProps.activo) ? true : false;
+    this.home = modalElement.componentProps.home;
     
   }
 
@@ -43,13 +52,15 @@ export class ModalAlarmPage implements OnInit {
   }
 
   registerAlarm(fecha){
-    console.log("fecha: "+fecha);
+    //console.log("fecha: "+fecha);
     this.global.showLoader();
     fecha = this.datePipe.transform(fecha,'yyyy-MM-dd');
-    console.log("fecha2: "+fecha);
+    //console.log("fecha2: "+fecha);
     this.US.registerdosis(this.US.account.current_user.uid, fecha).subscribe(
       res => { 
-        console.log(res);
+        //console.log(res);
+        if(this.home)
+          this.US.dosisdia = true;
         this.closeModal();
         this.global.hideLoader();
         // this.co.setRoot('/login');
@@ -62,5 +73,24 @@ export class ModalAlarmPage implements OnInit {
     );
   }
 
+  removeAlarm(nid){
+    console.log(nid)
+    this.US.removedosis(nid).subscribe(
+      res => { 
+        if(this.home)
+          this.US.dosisdia = false;
+        console.log(res);
+        
+        this.closeModal();
+        this.global.hideLoader();
+        // this.co.setRoot('/login');
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+        this.co.presentAlert('Error','','Ocurrió un error inesperado, intenta más tarde');
+        this.global.hideLoader();
+      }
+    );
+  }
 
 }

@@ -53,6 +53,24 @@ export class EncuentraPage implements OnInit {
       }
     );
 
+
+    this.US.loadclinic().subscribe(
+      res => { 
+      
+        var count = Object.keys(res).length;
+        
+        for(var i=0; i<count; i++){
+          var telefono = (res[i].telefono != null) ? 'Tel: '+ res[i].telefono : '';
+          res[i].telefono = telefono;
+        }
+        
+        this.clinicData = res;
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
+
   }
 
 }
