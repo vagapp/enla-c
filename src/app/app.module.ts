@@ -22,6 +22,8 @@ import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { DatePipe } from '@angular/common';
 
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -47,7 +49,8 @@ import { DatePipe } from '@angular/common';
     FileTransfer,
     File,
     FileOpener,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })
