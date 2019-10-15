@@ -26,7 +26,7 @@ export class PruebasPage implements OnInit {
   nidProximaPrueba:number;
   reminderProxPrueba:number;
   isNew:boolean=true;
-  reminder:number;
+  reminder:number = 0;
   constructor(
     public modalController: ModalController,
     private US: UserService,
@@ -137,6 +137,8 @@ export class PruebasPage implements OnInit {
     this.global.showLoader();
     this.pruebasServ.creaPruebaMed(fecha).subscribe(result =>{
       this.global.hideLoader();
+      console.log("res",result['nid'][0].value);
+      this.nidProximaPrueba = result['nid'][0].value;
       this.isNew=false;
       this.ultimaPrueba = result;
       this.presentToast("Se creo exitosamente la prueba");
