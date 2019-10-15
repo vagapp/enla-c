@@ -44,13 +44,14 @@
       </ion-row>
       <ion-row>
           
-          <ion-calendar 
+        <ion-calendar 
           [(ngModel)]="date"
           (ngModelChange)="onChange($event)"
+          (select)="onEventSelected($event)"
           [options]="options"
           type="string"
           format="YYYY-MM-DD">
-</ion-calendar>
+        </ion-calendar>
           <!-- <ion-calendar [(ngModel)]="dateMulti" (ngModelChange)="onChange($event)" [type]="string" [format]="'YYYY-MM-DD'" [options]="optionsMulti"> </ion-calendar> -->
       </ion-row>
     </ion-grid>

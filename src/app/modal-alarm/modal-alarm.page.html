@@ -24,9 +24,14 @@
     <ion-row>
       <div class="gray">
         <div class="flex_all-centered clinica-section">
-          <button class="bg-tertiary font-20" (click)="registerAlarm(dateParam)"><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya la tomé! </button>
+          <button *ngIf="activoSi == true" class="bg-tertiary font-20" (click)="registerAlarm(dateParam)"><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya la tomé! </button>
+          <button *ngIf="activoSi == false" class="bg-tertiary font-20 butondisabled"><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya la tomé! </button>
           <br>
-          <button class="bg-secondary font-20"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
+          <button *ngIf="activoNo == true" class="bg-secondary font-20" (click)="removeAlarm(nid)"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
+          <button *ngIf="activoNo == false" class="bg-secondary font-20 butondisabled"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
+          
+          <!-- <p *ngIf="activoSi == true">cuando es true</p>
+          <p *ngIf="activoSi == false">cuando es false</p> -->
           <br>
           <span class="title-label-href row" (click)="navegar('/dosis')">Ver registro completo   &nbsp; &nbsp;<img class="icon-button" src="../assets/imgs/chevron.svg"></span>
         </div>

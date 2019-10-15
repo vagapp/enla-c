@@ -37,7 +37,7 @@ export class EncuentraPage implements OnInit {
     );
 
 
-    this.US.loadclinic(7,11410).subscribe(
+    this.US.loadclinic(this.US.account.current_user.uid,this.US.account.current_user.codigo_postal).subscribe(
       res => { 
       
         var count = Object.keys(res).length;

@@ -26,6 +26,12 @@ export class HomePage {
   puedeMarcarPrueba:boolean=false;
   statusPrueba:boolean = false;
   nidProximaPrueba:any;
+  todayS: any;
+  datesOrigin: string[];
+  classId: boolean;
+  bandera: boolean;
+  nid: any;
+
   constructor(
     public US: UserService,
     private datePipe: DatePipe,
@@ -34,13 +40,18 @@ export class HomePage {
     public global: GlobalsService,
     public co: CommonService,
     public toastController: ToastController
-  ) {}
+  ) {
+    this.datesOrigin = [];
+    
+  }
   
   ngOnInit() {
+
     this.US.getLoginStatus().subscribe(
       res => { 
         this.US.account = res;
         if(this.US.account.current_user != null){
+          this.loadDates();
           this.name_head = this.US.account.current_user.fullname;
           this.date_head = this.datePipe.transform(this.US.account.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
           this.global.showLoader();
@@ -61,7 +72,44 @@ export class HomePage {
         console.log(err);
       }
     );
+
+    
+
   }
+
+  loadDates(){
+    console.log("entra");
+    this.US.loaddosis().subscribe(
+      resS => {
+        console.log(resS);
+        /*FECHA DE HOY*/
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        this.todayS = yyyy + '-' + mm + '-' +dd ;
+        var count = Object.keys(resS).length;
+        for(var i=0; i<count; i++){
+          this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
+        }
+        this.US.dosisdia = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS);
+        Object.keys(resS).forEach(key => {
+          //console.log(resS[key].field_fecha_de_dosis)
+          if (this.datePipe.transform(resS[key].field_fecha_de_dosis, 'yyyy-MM-dd') == this.todayS) {
+              console.log("Found.");
+              this.nid = resS[key].nid;
+              console.log(this.nid);
+          }
+      });
+        //console.log(Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS))
+        //this.nid = (this.bandera) ? 
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
+  }
+
 
   recuperaPruebaHoy(pruebas:any){
     let fechaUltimaPrueba = new Date(parseInt(pruebas[0].field_fecha_prueba[0].value));
@@ -107,9 +155,15 @@ export class HomePage {
 
   async openModal() {
     
+    /*COMPROBAMOS QUE NO HAYAMOS HECHO CHECK HOY */
+    
+    
+    //this.classId = (this.US.dosisdia) ? true :  false;
+
     const modal = await this.modalController.create({
       component: ModalAlarmPage,
-      cssClass: 'modalCss'
+      cssClass: 'modalCss',
+      componentProps: {'Paramdate': this.todayS,'activo':this.US.dosisdia, 'nid': this.nid, 'home': true}
     });
  
     modal.onDidDismiss().then((dataReturned) => {
