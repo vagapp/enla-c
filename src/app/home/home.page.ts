@@ -82,6 +82,7 @@ export class HomePage {
     console.log("entra");
     this.US.loaddosis().subscribe(
       resS => {
+        this.US.dosisdia = false;
         console.log(resS);
         /*FECHA DE HOY*/
         var today = new Date();
@@ -90,18 +91,23 @@ export class HomePage {
         var yyyy = today.getFullYear();
         this.todayS = yyyy + '-' + mm + '-' +dd ;
         var count = Object.keys(resS).length;
-        for(var i=0; i<count; i++){
-          this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
-        }
-        this.US.dosisdia = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS);
+        // for(var i=0; i<count; i++){
+        //   this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
+        // }
+
+        //this.US.dosisdia = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS);
+        
         Object.keys(resS).forEach(key => {
           //console.log(resS[key].field_fecha_de_dosis)
           if (this.datePipe.transform(resS[key].field_fecha_de_dosis, 'yyyy-MM-dd') == this.todayS) {
               console.log("Found.");
               this.nid = resS[key].nid;
+              this.US.dosisdia = true;
+              
               console.log(this.nid);
           }
       });
+      console.log("BANDERA: "+this.US.dosisdia);
         //console.log(Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS))
         //this.nid = (this.bandera) ? 
       },
@@ -190,7 +196,7 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: ModalAlarmPage,
       cssClass: 'modalCss',
-      componentProps: {'Paramdate': this.todayS,'activo':this.US.dosisdia, 'nid': this.nid, 'home': true}
+      componentProps: {'Paramdate': this.todayS,'activo':this.US.dosisdia, 'nid': this.nid, 'home': true, 'today': true}
     });
  
     modal.onDidDismiss().then((dataReturned) => {

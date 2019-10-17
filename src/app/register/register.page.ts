@@ -97,8 +97,22 @@ export class RegisterPage implements OnInit {
             this.US.register(values.name, values.lastname, values.mail, values.pass, fecha_nac, fecha_ini, values.institucion, values.name, values.sexo, values.cp).subscribe(
               res => { 
                 console.log(res);
-                this.global.hideLoader();
-                this.co.setRoot('/login');
+                /****************************************************************************/
+                this.US.login(values.mail, values.pass).subscribe(
+                  res => { 
+                    console.log(res);
+                    this.global.hideLoader();
+                    this.co.setRoot('/home');
+                  },
+                  (err: HttpErrorResponse) => { 
+                    console.log(err);
+                    this.co.presentAlert('Error','',err);
+                    this.global.hideLoader();
+                  }
+                );
+                /****************************************************************************/
+                //this.global.hideLoader();
+                //this.co.setRoot('/login');
               },
               (err: HttpErrorResponse) => { 
                 console.log(err);

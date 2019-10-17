@@ -14,7 +14,7 @@ export interface Account{
 export interface CurrentUser{
   uid: string;
   name: string;
-  lastname: string;
+  apellidos: string;
   sexo: Array<string>;
   email: string;
   codigo_postal: string;
@@ -32,7 +32,7 @@ export class UserService {
   public _account:Account;
   private _playerID:string = 'null';
   public _nodo:any = 1;
-  private _dosisdia: boolean = false;
+  private _dosisdia: boolean;
 
   get nodo():any{
     return this._nodo;
@@ -368,6 +368,7 @@ export class UserService {
     if(chgpass){
       data = {
         "name": [{ "value": info.mail }],
+        "field_apellidos": [{ "value":info.field_apellidos }],
         "mail": [{ "value": info.mail }],
         "field_fecha_de_nacimiento": [{ "value": info.field_fecha_de_nacimiento }],
         "field_inicio_del_tratamiento": [{ "value": info.field_inicio_del_tratamiento }],
@@ -382,6 +383,7 @@ export class UserService {
     }else{
       data = {
         "name": [{ "value": info.mail }],
+        "field_apellidos": [{ "value":info.field_apellidos }],
         "mail": [{ "value": info.mail }],
         "field_fecha_de_nacimiento": [{ "value": info.field_fecha_de_nacimiento }],
         "field_inicio_del_tratamiento": [{ "value": info.field_inicio_del_tratamiento }],
