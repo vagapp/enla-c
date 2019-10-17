@@ -205,24 +205,33 @@ export class HomePage {
 
   marcarPrueba(status:boolean){
     if(this.puedeMarcarPrueba){
-      this.presentAlertConfirm(status);
+      this.openModal2(status);
+      //this.presentAlertConfirm(status);
     }else{
-      this.openModal2();
+      this.openModal2(status);
     } 
   }
 
-  async openModal2() {
+  async openModal2(status:boolean) {
     
     const modal2 = await this.modalController.create({
       component: ModalLabPage,
       cssClass: 'modalCss',
       componentProps: { 
-        fecha_param:this.selectedDate
+        fecha_param:this.selectedDate,
+        status_param:status,
+        statusPrueba_param:this.statusPrueba,
+        puedeMarcarPrueba_param:this.puedeMarcarPrueba,
+        nidProximaPrueba_param:this.nidProximaPrueba,
       }
     });
  
     modal2.onDidDismiss().then((dataReturned) => {
+      console.log('R10--> '+dataReturned.data);
       if (dataReturned !== null) {
+        if(dataReturned.data == true || dataReturned.data == false){
+          this.statusPrueba = dataReturned.data;
+        }        
         this.dataReturned = dataReturned.data;
         //alert('Modal Sent Data :'+ dataReturned);
       }

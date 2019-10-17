@@ -5,7 +5,7 @@
   
       <ion-row>
         <ion-col class="close">
-          <ion-button (click)="closeModal()">X</ion-button>
+          <ion-button (click)="closeModalNo()">X</ion-button>
         </ion-col>
       </ion-row>
       
@@ -23,13 +23,19 @@
       </ion-row>
       <ion-row>
         <div class="gray">
-          <div class="flex_all-centered clinica-section">
+          <div *ngIf="!puedeMarcarPrueba_param" class="flex_all-centered clinica-section">
             <button class="button-not-now">Aún no es tiempo de realizar esta prueba, regresa cuando la fecha sea correcta</button>
             <br>
-            <button class="bg-tertiary font-20" ><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya asistí! </button>
+          </div>
+          <div *ngIf="puedeMarcarPrueba_param" class="flex_all-centered clinica-section">
+            <button *ngIf="!statusPrueba_param" class="bg-tertiary font-20" (click)="enableDisable(nidProximaPrueba_param,status_param)" ><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya asistí! </button>
+            <button *ngIf="statusPrueba_param" class="bg-tertiary font-20 butondisabled"><img class="icon-button" src="../assets/imgs/palomita.svg">  ¡Sí, ya la tomé! </button>
             <br>
-            <button class="bg-secondary font-20"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
-            <br>
+            <button *ngIf="statusPrueba_param" class="bg-secondary font-20" (click)="enableDisable(nidProximaPrueba_param,false)"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
+            <button *ngIf="!statusPrueba_param" class="bg-secondary font-20 butondisabled"><img class="icon-button" src="../assets/imgs/x.svg"> Aún no </button>
+            <br>            
+          </div>
+          <div class="flex_all-centered clinica-section">
             <span class="title-label-href row" (click)="navegar('/pruebas')">Ver registro completo   &nbsp; &nbsp;<img class="icon-button" src="../assets/imgs/chevron.svg"></span>
           </div>
         </div>
