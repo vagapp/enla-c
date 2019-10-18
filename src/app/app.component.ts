@@ -103,9 +103,8 @@ export class AppComponent {
     this.oneSignal.handleNotificationReceived().subscribe(data => {
       let msg = data.payload.body;
       let title = data.payload.title;
-      //let additionalData = data.payload.additionalData;
       this.presentToast(msg);
-      //this.showAlert(title, msg);
+      data.payload.sound = 'notienlac.wav';
     });
  
     // Notification was really clicked/opened
@@ -114,7 +113,7 @@ export class AppComponent {
       let additionalData = data.notification.payload.additionalData;
       let msg = data.notification.payload.body;
       let type = data.notification.payload.additionalData.type;
-      console.log(type);
+      
       
       if(type == 'alarma'){
         //miestro modal de alarmas de dosis
