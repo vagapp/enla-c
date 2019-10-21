@@ -28,7 +28,7 @@ export class DosisPage implements OnInit {
   nid: any;
 
   constructor(
-    private US: UserService,
+    public US: UserService,
     private datePipe: DatePipe,
     public modalController: ModalController,
     private global: GlobalsService,
