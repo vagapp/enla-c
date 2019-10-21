@@ -19,6 +19,7 @@ export class ModalAlarmPage implements OnInit {
   activoNo: boolean;
   nid: any;
   home: boolean;
+  isToday: boolean;
 
   constructor(
     private modalController: ModalController,
@@ -37,6 +38,7 @@ export class ModalAlarmPage implements OnInit {
     this.activoSi = (modalElement.componentProps.activo) ? false : true;
     this.activoNo = (modalElement.componentProps.activo) ? true : false;
     this.home = modalElement.componentProps.home;
+    this.isToday = modalElement.componentProps.today;
     
   }
 
@@ -59,8 +61,14 @@ export class ModalAlarmPage implements OnInit {
     this.US.registerdosis(this.US.account.current_user.uid, fecha).subscribe(
       res => { 
         //console.log(res);
-        if(this.home)
+        if(this.isToday)
           this.US.dosisdia = true;
+        if(this.home && this.isToday){
+          console.log("entra if")
+          this.US.dosisdia = true;
+        }
+          
+        this.co.presentAlert('Dosis Registrada','','Tu dosis del día ha quedado registrada, ¡Sigue así!');
         this.closeModal();
         this.global.hideLoader();
         // this.co.setRoot('/login');
@@ -74,13 +82,24 @@ export class ModalAlarmPage implements OnInit {
   }
 
   removeAlarm(nid){
-    console.log(nid)
+    this.global.showLoader();
     this.US.removedosis(nid).subscribe(
-      res => { 
-        if(this.home)
+      res => {
+
+        if(this.isToday){
+          console.log("entra if is today")
           this.US.dosisdia = false;
-        console.log(res);
+          console.log(this.US.dosisdia);
+        }
         
+        if(this.home && this.isToday){
+          console.log("entra if")
+          this.US.dosisdia = false;
+        }
+        
+          
+        console.log(res);
+        this.co.presentAlert('Registro Eliminado','','Hemos eliminado el registro exitosamente.');
         this.closeModal();
         this.global.hideLoader();
         // this.co.setRoot('/login');

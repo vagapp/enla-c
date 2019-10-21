@@ -141,7 +141,7 @@ export class PruebasPage implements OnInit {
       this.nidProximaPrueba = result['nid'][0].value;
       this.isNew=false;
       this.ultimaPrueba = result;
-      this.presentToast("Se creo exitosamente la prueba");
+      this.presentToast("Tu prueba de laboratorio ha quedado registrada, no te olvides de programar la siguiente.");
     },(err:HttpErrorResponse) => {
       this.global.hideLoader();
       this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
@@ -153,7 +153,7 @@ export class PruebasPage implements OnInit {
     this.pruebasServ.updatePruebasMed(fecha, this.nidProximaPrueba, undefined).subscribe(result =>{
       this.global.hideLoader();
       this.ultimaPrueba = result;
-      this.presentToast("Se actualizó exitosamente la prueba");
+      this.presentToast("Tu prueba de laboratorio ha sido actualizada, no te olvides de programar la siguiente.");
     },(err:HttpErrorResponse) => {
       this.global.hideLoader();
       this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);
@@ -165,7 +165,10 @@ export class PruebasPage implements OnInit {
     this.pruebasServ.updatePruebasMed(undefined, nid, status).subscribe(result =>{
       this.global.hideLoader();
       this.pruebasLista[index] = result;
-      this.presentToast("Se marcó exitosamente la prueba");
+      if(this.pruebasLista[index].field_status_pruebamed[0].value)
+        this.presentToast("Tu prueba de laboratorio ha quedado registrada, no te olvides de programar la siguiente.");
+      else
+        this.presentToast("Hemos eliminado el registro exitosamente");
     },(err:HttpErrorResponse) => {
       this.global.hideLoader();
       this.co.presentAlert('Error','Ocurrio un error al recuperar tu alarma.', err.error.message);

@@ -46,15 +46,32 @@
   padding-left: 2rem;
   padding-right: 2rem;
   .font-subtext{
-    text-align: justify;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: 400;
+    line-height: 1rem;
+    // text-align: left;
     padding: 0 !important;
+  }
+  .font-label {
+    font-size: 1.2rem;
   }
 }
 
 .margin-icon{
-  margin-top: 20px;
-  width: 100%;
+  height: 50px;
+  // margin-top: 20px;
+  // width: 100%;
   display: initial;
+}
+
+.margin-icon-config{
+  height: 35px;
+  display: initial;
+}
+
+.font-subtext {
+  font-size: 1rem;
 }
 /*
 margin-top: 20px;

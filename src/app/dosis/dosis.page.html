@@ -31,7 +31,9 @@
         <div class="clinica gray">
           <div class="background_shadow grid_alarm">
             <span class="flex_all-centered">
-              <img  class="icon-img" src='../assets/imgs/check.svg'>
+              <!-- <img  class="icon-img" src='../assets/imgs/check.svg' (click)="imgModal()"> -->
+              <img  *ngIf="US.dosisdia == true" class="icon-img" src="../assets/imgs/check.svg" (click)="imgModal()">
+              <img  *ngIf="US.dosisdia == false"class="icon-img" src="../assets/imgs/no-check.svg" (click)="imgModal()">
             </span>
             <span class="flex_left" >
               <span class="section font-primary font-14 font-bold">Dosis del día</span>
