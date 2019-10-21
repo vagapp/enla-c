@@ -200,6 +200,7 @@ export class HomePage {
     });
  
     modal.onDidDismiss().then((dataReturned) => {
+      this.loadDates();
       if (dataReturned !== null) {
         this.dataReturned = dataReturned.data;
         //alert('Modal Sent Data :'+ dataReturned);

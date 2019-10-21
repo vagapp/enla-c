@@ -115,7 +115,8 @@ export class ConfiguracionPage implements OnInit {
       inputs: [
         {
           name: 'currentPassword',
-          placeholder: 'Password'
+          placeholder: 'Password',
+          type: 'password'
         }
       ],
       buttons: [
