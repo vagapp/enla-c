@@ -54,9 +54,39 @@ export class ConfiguracionPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
 
+    this.US.loadinsti().subscribe(
+      res => { 
+        console.log("1");
+        this.institutoData = res;
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
+    
+    this.US.loadsexos().subscribe(
+      resS => { 
+        console.log("2");
+        this.sexosData = resS;
+        this.loadInformation();
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
+
+
+    
+
+    
+  }
+
+  loadInformation(){
     this.US.getLoginStatus().subscribe(
       res => { 
+        console.log("3");
         console.log(res.current_user);
         this.in_name             = res.current_user.fullname;
         this.in_apellidos        = res.current_user.apellidos;
@@ -72,25 +102,8 @@ export class ConfiguracionPage implements OnInit {
         console.log(err);
       }
     );
-
-    this.US.loadsexos().subscribe(
-      resS => { 
-        this.sexosData = resS;
-      },
-      (err: HttpErrorResponse) => { 
-        console.log(err);
-      }
-    );
-
-    this.US.loadinsti().subscribe(
-      res => { 
-        this.institutoData = res;
-      },
-      (err: HttpErrorResponse) => { 
-        console.log(err);
-      }
-    );
   }
+
 
   searchCP(valor){
     console.log(valor);

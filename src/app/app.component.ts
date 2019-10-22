@@ -13,8 +13,10 @@ import { ModalController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 import { ModalAlarmPage } from 'src/app/modal-alarm/modal-alarm.page';
 import { ModalLabPage } from 'src/app/modal-lab/modal-lab.page';
-
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+
 
 @Component({
   selector: 'app-root',
@@ -54,9 +56,23 @@ export class AppComponent {
     private alertCtrl: AlertController,
     public toastController: ToastController,
     public modalController: ModalController,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private nativeAudio: NativeAudio
   ) {
     this.initializeApp();
+
+    this.platform.ready().then(() => {
+      this.nativeAudio.unload('trackID').then(function() {
+          console.log("unloaded audio!");
+      }, function(err) {
+          console.log("couldn't unload audio... " + err);
+      });
+      this.nativeAudio.preloadComplex('trackID', 'assets/audio/notienlac.mp3', 1, 1, 0).then(function() {
+          console.log("audio loaded!");
+      }, function(err) {
+          console.log("audio failed: " + err);
+      });
+    });
   }
 
   loginStatus(){
@@ -103,10 +119,18 @@ export class AppComponent {
     this.oneSignal.handleNotificationReceived().subscribe(data => {
       let msg = data.payload.body;
       let title = data.payload.title;
+      
+      this.nativeAudio.play('trackID').then(function() {
+        console.log("playing audio!");
+      }, function(err) {
+        console.log("errorrrr playing audio: " + err);
+      });
       this.presentToast(msg);
       data.payload.sound = 'notienlac.wav';
+      
     });
- 
+    
+    
     // Notification was really clicked/opened
     this.oneSignal.handleNotificationOpened().subscribe(data => {
       // Just a note that the data is a different place here!
@@ -141,7 +165,7 @@ export class AppComponent {
 
 
   }
- 
+  
   async showAlert(title, msg) {
     const alert = await this.alertCtrl.create({
       header: title,
