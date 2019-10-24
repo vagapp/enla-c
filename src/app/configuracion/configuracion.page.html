@@ -11,18 +11,24 @@
 </ion-header>
  
   <ion-content class="ion-justify-content-center">
-    <ion-toolbar color="primary" class="name-toolbar">
+    <!-- <ion-toolbar color="primary" class="name-toolbar">
       <ion-label class="font-name">{{name_head}}</ion-label>
       <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
-    </ion-toolbar>
+    </ion-toolbar> -->
     <ion-row justify-content-center>
       <ion-col align-self-center>
         <form [formGroup]="update_data"  (ngSubmit)="updData(update_data.value)">
           <div padding>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
-                <ion-label position="floating" class="label-size">NOMBRE COMPLETO</ion-label>
+                <ion-label position="floating" class="label-size">NOMBRE</ion-label>
                 <ion-input formControlName="name" type="text" required value="{{in_name}}"></ion-input>
+              </ion-item>
+            </ion-list>
+            <ion-list class="list-height">
+              <ion-item class="ion-item-color-border">
+                <ion-label position="floating" class="label-size">APELLIDOS</ion-label>
+                <ion-input formControlName="apellidos" type="text" required value="{{in_apellidos}}"></ion-input>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
@@ -46,13 +52,13 @@
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">FECHA DE NACIMIENTO</ion-label>
-                <ion-datetime  formControlName="fecha_nacimiento" value="{{in_fecha_nacimiento}}" ></ion-datetime>
+                <ion-datetime  formControlName="fecha_nacimiento" value="{{in_fecha_nacimiento}}"  monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">SEXO</ion-label>
-                <ion-select formControlName="sexo" [(ngModel)]="sexo">
+                <ion-select formControlName="sexo" [(ngModel)]="sexo" ok-text="Aceptar" cancel-text="Cancelar">
                     <ion-select-option *ngFor="let item of sexosData" value="{{item.tid}}">{{item.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -60,7 +66,7 @@
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">INSTITUCIÓN</ion-label>
-                <ion-select formControlName="institucion" [(ngModel)]="institucion">
+                <ion-select formControlName="institucion" [(ngModel)]="institucion" ok-text="Aceptar" cancel-text="Cancelar">
                     <ion-select-option *ngFor="let item of institutoData" value="{{item.tid}}">{{item.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -86,7 +92,7 @@
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">INICIO DEL TRATAMIENTO</ion-label>
-                <ion-datetime  formControlName="fecha_inicio" value="{{in_fecha_inicio}}"></ion-datetime>
+                <ion-datetime  formControlName="fecha_inicio" value="{{in_fecha_inicio}}"  monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
                 <!-- <ion-input formControlName="fecha_inicio" type="text" ngModel required></ion-input> -->
               </ion-item>
             </ion-list>

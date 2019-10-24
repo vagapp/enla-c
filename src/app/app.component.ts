@@ -8,8 +8,15 @@ import { UserService } from '../app/api/user.service';
 import { CommonService } from '../app/app/common.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GlobalsService } from './api/globals.service';
-
+import { ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
+import { ModalAlarmPage } from 'src/app/modal-alarm/modal-alarm.page';
+import { ModalLabPage } from 'src/app/modal-lab/modal-lab.page';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+
 
 @Component({
   selector: 'app-root',
@@ -30,6 +37,12 @@ export class AppComponent {
     }
   ];
 
+  dataReturned:any;
+  nid: any;
+  todayS: any;
+  datesOrigin: string[];
+  selectedDate:any;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -40,9 +53,26 @@ export class AppComponent {
     public US: UserService,
     public co: CommonService,
     public globals: GlobalsService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public toastController: ToastController,
+    public modalController: ModalController,
+    private datePipe: DatePipe,
+    private nativeAudio: NativeAudio
   ) {
     this.initializeApp();
+
+    this.platform.ready().then(() => {
+      this.nativeAudio.unload('trackID').then(function() {
+          console.log("unloaded audio!");
+      }, function(err) {
+          console.log("couldn't unload audio... " + err);
+      });
+      this.nativeAudio.preloadComplex('trackID', 'assets/audio/notienlac.mp3', 1, 1, 0).then(function() {
+          console.log("audio loaded!");
+      }, function(err) {
+          console.log("audio failed: " + err);
+      });
+    });
   }
 
   loginStatus(){
@@ -89,16 +119,39 @@ export class AppComponent {
     this.oneSignal.handleNotificationReceived().subscribe(data => {
       let msg = data.payload.body;
       let title = data.payload.title;
-      //let additionalData = data.payload.additionalData;
-      this.showAlert(title, msg);
+      
+      this.nativeAudio.play('trackID').then(function() {
+        console.log("playing audio!");
+      }, function(err) {
+        console.log("errorrrr playing audio: " + err);
+      });
+      this.presentToast(msg);
+      data.payload.sound = 'notienlac.wav';
+      
     });
- 
+    
+    
     // Notification was really clicked/opened
     this.oneSignal.handleNotificationOpened().subscribe(data => {
       // Just a note that the data is a different place here!
       let additionalData = data.notification.payload.additionalData;
- 
-      this.showAlert('Notification opened', 'You already read this before');
+      let msg = data.notification.payload.body;
+      let type = data.notification.payload.additionalData.type;
+      
+      
+      if(type == 'alarma'){
+        //miestro modal de alarmas de dosis
+        this.openModal();
+      }else if(type == 'prueba_medica'){
+        //muestro modal de prueba media
+        this.openModal2();
+      }else{
+        //muestro alert default
+        this.showAlert( type.charAt(0).toUpperCase() + type.slice(1), msg);
+      }
+      
+      
+
     });
  
     this.oneSignal.endInit();
@@ -112,7 +165,7 @@ export class AppComponent {
 
 
   }
- 
+  
   async showAlert(title, msg) {
     const alert = await this.alertCtrl.create({
       header: title,
@@ -161,4 +214,93 @@ export class AppComponent {
       }
     );
   }
+
+  async presentToast(mensaje:string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 10000,
+      showCloseButton: true,
+      closeButtonText: "X"
+    });
+    toast.present();
+  }
+
+  loadDates(){
+    console.log("entra");
+    this.US.loaddosis().subscribe(
+      resS => {
+        console.log(resS);
+        /*FECHA DE HOY*/
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        this.todayS = yyyy + '-' + mm + '-' +dd ;
+        var count = Object.keys(resS).length;
+        for(var i=0; i<count; i++){
+          this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
+        }
+        this.US.dosisdia = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS);
+        Object.keys(resS).forEach(key => {
+          //console.log(resS[key].field_fecha_de_dosis)
+          if (this.datePipe.transform(resS[key].field_fecha_de_dosis, 'yyyy-MM-dd') == this.todayS) {
+              console.log("Found.");
+              this.nid = resS[key].nid;
+              console.log(this.nid);
+          }
+      });
+        //console.log(Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS))
+        //this.nid = (this.bandera) ? 
+      },
+      (err: HttpErrorResponse) => { 
+        console.log(err);
+      }
+    );
+  }
+
+  async openModal() {
+
+    //this.loadDates();
+    
+    /*COMPROBAMOS QUE NO HAYAMOS HECHO CHECK HOY */
+    
+    
+    //this.classId = (this.US.dosisdia) ? true :  false;
+
+    const modal = await this.modalController.create({
+      component: ModalAlarmPage,
+      cssClass: 'modalCss',
+      componentProps: {'Paramdate': this.todayS,'activo':this.US.dosisdia, 'nid': this.nid, 'home': true}
+    });
+ 
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+ 
+    return await modal.present();
+  }
+
+  async openModal2() {
+    
+    const modal2 = await this.modalController.create({
+      component: ModalLabPage,
+      cssClass: 'modalCss',
+      componentProps: { 
+        fecha_param:this.selectedDate
+      }
+    });
+ 
+    modal2.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+ 
+    return await modal2.present();
+  }
+
 }

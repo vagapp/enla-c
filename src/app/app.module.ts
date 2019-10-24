@@ -22,7 +22,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { DatePipe } from '@angular/common';
-
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @NgModule({
@@ -51,8 +51,9 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     FileTransfer,
     File,
     FileOpener,
+    NativeAudio,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    OneSignal
+    OneSignal    
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController , NavParams} from '@ionic/angular';
+import { ModalController , NavParams, ToastController} from '@ionic/angular';
 import { AlarmasService } from '../api/alarmas.service';
 import { GlobalsService } from '../api/globals.service';
 import { CommonService } from '../app/common.service';
@@ -29,7 +29,8 @@ export class ModalAlarmConfigPage implements OnInit {
     public global: GlobalsService,
     public co: CommonService,
     public nav : NavParams,
-    public alarmserv : AlarmasService
+    public alarmserv : AlarmasService,
+    public toastController: ToastController
   ) { }
     
   ngOnInit() {
@@ -56,7 +57,8 @@ export class ModalAlarmConfigPage implements OnInit {
       this.alarmserv.actualizaAlarma(undefined,this.nid_param, this.hourAlarm).subscribe(result =>{
         this.node = result;
         this.global.hideLoader();
-        this.co.presentAlert('Alarma', '', "Se guardo exitosamente");
+        this.presentToast("La alarma se guardo exitosamente");
+        //this.co.presentAlert('Alarma', '', "Se guardo exitosamente");
         this.isUpdated = true;
         },(err:HttpErrorResponse) => {
           this.global.hideLoader();
@@ -68,7 +70,8 @@ export class ModalAlarmConfigPage implements OnInit {
       this.alarmserv.creaAlarma(this.hourAlarm, this.timezone).subscribe(result =>{
         this.node = result;
         this.global.hideLoader();
-        this.co.presentAlert('Alarma', '', "Se creo correctamente la alarma");
+        //this.co.presentAlert('Alarma', '', "Se creo correctamente la alarma");
+        this.presentToast("La alarma se creo correctamente");
         this.isUpdated = true;
         },(err:HttpErrorResponse) => {
           this.global.hideLoader();
@@ -84,5 +87,13 @@ export class ModalAlarmConfigPage implements OnInit {
     let datetext = date.toTimeString();
     datetext = datetext.split(' ')[0];
     this.hourAlarm = datetext.substring(0,5);
+  }
+
+  async presentToast(mensaje:string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 }

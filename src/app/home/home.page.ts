@@ -82,6 +82,7 @@ export class HomePage {
     console.log("entra");
     this.US.loaddosis().subscribe(
       resS => {
+        this.US.dosisdia = false;
         console.log(resS);
         /*FECHA DE HOY*/
         var today = new Date();
@@ -90,18 +91,23 @@ export class HomePage {
         var yyyy = today.getFullYear();
         this.todayS = yyyy + '-' + mm + '-' +dd ;
         var count = Object.keys(resS).length;
-        for(var i=0; i<count; i++){
-          this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
-        }
-        this.US.dosisdia = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS);
+        // for(var i=0; i<count; i++){
+        //   this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
+        // }
+
+        //this.US.dosisdia = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS);
+        
         Object.keys(resS).forEach(key => {
           //console.log(resS[key].field_fecha_de_dosis)
           if (this.datePipe.transform(resS[key].field_fecha_de_dosis, 'yyyy-MM-dd') == this.todayS) {
               console.log("Found.");
               this.nid = resS[key].nid;
+              this.US.dosisdia = true;
+              
               console.log(this.nid);
           }
       });
+      console.log("BANDERA: "+this.US.dosisdia);
         //console.log(Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayS))
         //this.nid = (this.bandera) ? 
       },
@@ -190,10 +196,11 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: ModalAlarmPage,
       cssClass: 'modalCss',
-      componentProps: {'Paramdate': this.todayS,'activo':this.US.dosisdia, 'nid': this.nid, 'home': true}
+      componentProps: {'Paramdate': this.todayS,'activo':this.US.dosisdia, 'nid': this.nid, 'home': true, 'today': true}
     });
  
     modal.onDidDismiss().then((dataReturned) => {
+      this.loadDates();
       if (dataReturned !== null) {
         this.dataReturned = dataReturned.data;
         //alert('Modal Sent Data :'+ dataReturned);
@@ -205,24 +212,33 @@ export class HomePage {
 
   marcarPrueba(status:boolean){
     if(this.puedeMarcarPrueba){
-      this.presentAlertConfirm(status);
+      this.openModal2(status);
+      //this.presentAlertConfirm(status);
     }else{
-      this.openModal2();
+      this.openModal2(status);
     } 
   }
 
-  async openModal2() {
+  async openModal2(status:boolean) {
     
     const modal2 = await this.modalController.create({
       component: ModalLabPage,
       cssClass: 'modalCss',
       componentProps: { 
-        fecha_param:this.selectedDate
+        fecha_param:this.selectedDate,
+        status_param:status,
+        statusPrueba_param:this.statusPrueba,
+        puedeMarcarPrueba_param:this.puedeMarcarPrueba,
+        nidProximaPrueba_param:this.nidProximaPrueba,
       }
     });
  
     modal2.onDidDismiss().then((dataReturned) => {
+      console.log('R10--> '+dataReturned.data);
       if (dataReturned !== null) {
+        if(dataReturned.data == true || dataReturned.data == false){
+          this.statusPrueba = dataReturned.data;
+        }        
         this.dataReturned = dataReturned.data;
         //alert('Modal Sent Data :'+ dataReturned);
       }

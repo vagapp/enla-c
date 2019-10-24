@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -18,15 +18,17 @@ export class DosisPage implements OnInit {
   name_head: any;
   date_head: any;
   todayS: any;
+  todayF: any;
   dataReturned:any;
   date: string[];
   options: CalendarComponentOptions;
   dates: Date[];
   datesOrigin: string[];
   numId: any;
+  nid: any;
 
   constructor(
-    private US: UserService,
+    public US: UserService,
     private datePipe: DatePipe,
     public modalController: ModalController,
     private global: GlobalsService,
@@ -45,7 +47,7 @@ export class DosisPage implements OnInit {
         //console.log(res);
         this.name_head = res.current_user.fullname;
         //this.datePipe.transform()
-        this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy','+0000');
+        this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
         
       },
       (err: HttpErrorResponse) => { 
@@ -63,45 +65,44 @@ export class DosisPage implements OnInit {
   loadDates(){
 
     var today = new Date();
+    
     this.datesOrigin = [];
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
 
     this.todayS = dd + '/' + mm + '/' + yyyy;
+    this.todayF = yyyy + '-' + mm + '-' + dd;
 
 
     this.US.loaddosis().subscribe(
       resS => {
-        console.log(resS);
-        //this.datesOrigin = resS;
+        
         const daysConfig: DayConfig[] = [];
         
         var count = Object.keys(resS).length;
-
         var noDosis = this.getDates(new Date(this.US.account.current_user.fecha_inicio_tratamiento), new Date(today));
         
         for(var j=0; j<noDosis.length; j++){
+          var fecha = this.datePipe.transform(noDosis[j], 'yyyy-MM-dd');
+          var clase = 'my-day-no'
           for(var i=0; i<count; i++){
-            var clase = 'my-day-no'
             this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
             if(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd') == this.datePipe.transform(noDosis[j], 'yyyy-MM-dd')){
-              var fecha = new Date(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd','GMT+1500'));
+              fecha = this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd');
               clase = 'my-day nid_'+resS[i].nid;
-            }else{
-              var fecha = new Date(this.datePipe.transform(noDosis[j], 'yyyy-MM-dd'))
-              clase = 'my-day-no';
+              this.nid = resS[i].nid;
             }
-             
-            daysConfig.push({
-              date: fecha,
-              cssClass: clase
-            });
           }
+          daysConfig.push({
+            date: new Date(fecha+'T00:00:00'),
+            cssClass: clase
+          });
         }
         this.options = {
           daysConfig,
-          from: new Date(this.datePipe.transform(this.US.account.current_user.fecha_inicio_tratamiento, 'yyyy-MM-dd','GMT+1500')),
+          from: new Date(this.US.account.current_user.fecha_inicio_tratamiento),
+          to: new Date(this.todayF+'T00:00:00')
         };
         
       },
@@ -120,6 +121,7 @@ export class DosisPage implements OnInit {
         this.dates.push(currentDate);
         currentDate = this.addDays(currentDate);
     }
+    
     return this.dates;
   }
 
@@ -141,22 +143,25 @@ export class DosisPage implements OnInit {
   }
 
 
+
   onChange($event){
     console.log($event);
     var bandera = false;
     bandera = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == $event);
     //console.log(bandera);
     var dateSel = $event;
-    this.openModal(dateSel, bandera, this.numId);
+    var isToday = (this.todayF == dateSel) ? true : false;
+    console.log(isToday);
+    this.openModal(dateSel, bandera, this.numId, isToday, false);
 
   }
 
-  async openModal(Paramdate, bandera, classId) {
+  async openModal(Paramdate, bandera, classId, isToday, ishome) {
     
     const modal = await this.modalController.create({
       component: ModalAlarmPage,
       cssClass: 'modalCss',
-      componentProps: {'Paramdate': Paramdate,'activo':bandera, 'nid': classId, 'home': false}
+      componentProps: {'Paramdate': Paramdate,'activo':bandera, 'nid': classId, 'home': ishome, 'today': isToday}
     });
  
     modal.onDidDismiss().then((dataReturned) => {
@@ -168,6 +173,14 @@ export class DosisPage implements OnInit {
     });
  
     return await modal.present();
+  }
+
+  imgModal(){
+    var bandera = false;
+    bandera = Object.keys(this.datesOrigin).some(key => this.datesOrigin[key] == this.todayF);
+    console.log(bandera);
+    var isToday = true;
+    this.openModal(this.todayF, bandera, this.nid, isToday, true);
   }
 /*
 this.US.registerdosis("hola", "adios").subscribe(

@@ -20,7 +20,7 @@
     <ion-row>
       <div class="gray">
         <div class="flex_all-centered clinica-section">
-          <ion-datetime class="color" displayFormat="HH:mm a" placeholder="00:00 xm" [(ngModel)]="selectedDate" (ionChange)="parseDate()"></ion-datetime>
+          <ion-datetime class="color" displayFormat="HH:mm a" placeholder="00:00 xm" [(ngModel)]="selectedDate" (ionChange)="parseDate()" doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
           <br>
           <button class="bg-tertiary font-20" (click)="crearAlarma()"><img class="icon-button" src="../assets/imgs/palomita.svg">Guardar</button>
           <br>
