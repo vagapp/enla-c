@@ -15,6 +15,7 @@ import { ModalAlarmPageModule } from './modal-alarm/modal-alarm.module';
 import { ModalLabPageModule } from './modal-lab/modal-lab.module';
 import { ModalAlarmConfigPageModule } from './modal-alarm-config/modal-alarm-config.module';
 import { TermscondsPageModule } from './termsconds/termsconds.module';
+import { PasswordPageModule } from './password/password.module';
 import { AlertPageModule } from './alert/alert.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
@@ -39,6 +40,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     ModalLabPageModule,
     ModalAlarmConfigPageModule,
     TermscondsPageModule,
+    PasswordPageModule,
     AlertPageModule,
     BrowserModule,
     HttpClientModule

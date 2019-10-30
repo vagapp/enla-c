@@ -314,7 +314,7 @@ export class UserService {
       "mail":email,
     };
     return this.http.post<any>(
-      'user/lost-password?_format=json',
+      this.global.API+'user/lost-password?_format=json',
       JSON.stringify(datos),
       { headers: headers, withCredentials: true }).pipe(
         map(

@@ -7,6 +7,7 @@ import { UserService } from '../api/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { TermscondsPage } from '../termsconds/termsconds.page';
+import { PasswordPage } from '../password/password.page';
 
 @Component({
   selector: 'app-login',
@@ -49,17 +50,14 @@ export class LoginPage implements OnInit {
     this.global.showLoader();
     this.US.login(data.email,data.password).subscribe(
       (res:any) => { 
-        this.US.getLoginStatus().subscribe(
-          (res:any) => { 
-            this.global.hideLoader();
-            this.US.account = res;
-            console.log("respuesta ", res);
-            this.co.setRoot('/home');
-          },
-          (err: HttpErrorResponse) => { 
-            this.co.presentAlert('Error','¡UPS!, tuvimos un provema verificando tu sesión!',err.error.message);
-          }
-        );
+        console.log("AFTER LOGIN ", res);
+        this.global.hideLoader();
+        this.US.account = res;
+        this.co.setRoot('/home');
+        if(this.US.account.temp_login){
+          this.co.presentAlert('Inicio de sesión','Haz iniciado sesión con una contraseña temporal, te recomendamos cambiarla.','');
+          this.co.go('/configuracion');
+        }
       },
       (err: HttpErrorResponse) => { 
         console.log(err);
@@ -80,6 +78,13 @@ export class LoginPage implements OnInit {
     this.US.nodo = id;
     const modal = await this.modalController.create({
       component: TermscondsPage
+    });
+    return await modal.present();
+  }
+
+  async openPassword(){
+    const modal = await this.modalController.create({
+      component: PasswordPage
     });
     return await modal.present();
   }
