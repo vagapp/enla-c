@@ -43,7 +43,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     PasswordPageModule,
     AlertPageModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

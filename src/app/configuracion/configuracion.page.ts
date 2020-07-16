@@ -1,4 +1,4 @@
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -27,12 +27,13 @@ export class ConfiguracionPage implements OnInit {
     cp: new FormControl(null,Validators.required),
     estado: new FormControl(null,Validators.required),
     municipio: new FormControl(null,Validators.required),
-    fecha_inicio: new FormControl(null,Validators.required)
+    fecha_inicio: new FormControl(null,Validators.required),
+    fecha_fin: new FormControl(null,Validators.required)
   });
 
   sexosData: any;
   institutoData: any;
-  sexo: any;
+  sexo: any;angular
   institucion: any;
   name_head: any;
   date_head: any;
@@ -44,6 +45,7 @@ export class ConfiguracionPage implements OnInit {
   in_municipio: any;
   in_estado: any;
   in_fecha_inicio: any;
+  in_fecha_fin: any;
   
 
   constructor(
@@ -94,6 +96,7 @@ export class ConfiguracionPage implements OnInit {
         this.in_fecha_nacimiento = res.current_user.fecha_nacimiento;
         this.in_cp               = res.current_user.codigo_postal;
         this.in_fecha_inicio     = res.current_user.fecha_inicio_tratamiento;
+        this.in_fecha_fin        = res.current_user.fecha_fin_tratamiento;
         this.sexo                = res.current_user.sexo['tid'];
         this.institucion         = res.current_user.institucion['tid'];
         this.searchCP(this.in_cp);
@@ -155,11 +158,14 @@ export class ConfiguracionPage implements OnInit {
               (values.mail != null && values.mail != '') && 
               (values.fecha_nacimiento != null && values.fecha_nacimiento != '') && 
               (values.fecha_inicio != null && values.fecha_inicio != '') && 
+              (values.fecha_fin != null && values.fecha_fin != '') && 
               (values.institucion != null && values.institucion != '') && 
               (values.sexo != null && values.sexo != '') &&
               (values.cp != null && values.cp != '')){
               bandera = true;       
+              if(!this.validateFechas(values.fecha_inicio,values.fecha_fin)){
               if(this.isEmail(values.mail)){
+                
                 bandera = true;
                 if((values.pass != null && values.pass != '') || (values.pass1 != null && values.pass1 != '')){
                   if(values.pass == values.pass1){
@@ -177,6 +183,7 @@ export class ConfiguracionPage implements OnInit {
                   var news = {'mail': values.mail,
                               'field_fecha_de_nacimiento': this.datePipe.transform(values.fecha_nacimiento, 'yyyy-MM-dd'),
                               'field_inicio_del_tratamiento': this.datePipe.transform(values.fecha_inicio, 'yyyy-MM-dd'),
+                              'field_fin_del_tratamiento': this.datePipe.transform(values.fecha_fin, 'yyyy-MM-dd'),
                               'field_institucion': values.institucion,
                               'field_nombre_completo': values.name,
                               'field_apellidos': values.apellidos,
@@ -202,6 +209,9 @@ export class ConfiguracionPage implements OnInit {
                 bandera = false;
                 this.co.presentAlert('Error','','Ingrese un email valido');
               }
+              }else{
+                this.co.presentAlert('Error','','La fecha de fin de tratamiento debe ser después de la fecha de inicio');
+              }
             }else{
               bandera = false;
               this.co.presentAlert('Error','','Favor de completar todos los campos');
@@ -226,6 +236,16 @@ export class ConfiguracionPage implements OnInit {
     return serchfind
   }
 
+  validateFechas(inicio,fin):boolean{
+    let first = new Date(inicio);
+    let second = new Date(fin);
+    let full = Math.round((second.getTime()-first.getTime())/(1000*60*60*24));
+    console.log('full is',full);
+    return full <= 0;
+  }
+
+
+ 
 
 
 }

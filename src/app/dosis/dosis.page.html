@@ -8,11 +8,13 @@
       <img class="enlac-logo" src="../assets/imgs/logo.svg"  routerLink="/home">
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content class="ion-justify-content-center">
     <ion-toolbar color="primary" class="name-toolbar">
       <ion-label class="font-name">{{name_head}}</ion-label>
       <ion-label class="font-subtoolbar">Inicio del tratamiento {{date_head}}</ion-label>
+      <ion-label class="font-subtoolbar">Fin del tratamiento {{date_head_fin}}</ion-label>
+      <ion-label class="font-subtoolbar">{{date_head_percent}}% de avance de tratamiento</ion-label>
     </ion-toolbar>
     <ion-grid class="margin-toop">
       <ion-row>
@@ -56,6 +58,7 @@
         </ion-calendar>
           <!-- <ion-calendar [(ngModel)]="dateMulti" (ngModelChange)="onChange($event)" [type]="string" [format]="'YYYY-MM-DD'" [options]="optionsMulti"> </ion-calendar> -->
       </ion-row>
+      <app-consulte></app-consulte>
     </ion-grid>
 
   </ion-content>
