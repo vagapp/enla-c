@@ -1,4 +1,4 @@
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -33,7 +33,7 @@ export class ConfiguracionPage implements OnInit {
 
   sexosData: any;
   institutoData: any;
-  sexo: any;
+  sexo: any;angular
   institucion: any;
   name_head: any;
   date_head: any;
@@ -163,7 +163,9 @@ export class ConfiguracionPage implements OnInit {
               (values.sexo != null && values.sexo != '') &&
               (values.cp != null && values.cp != '')){
               bandera = true;       
+              if(!this.validateFechas(values.fecha_inicio,values.fecha_fin)){
               if(this.isEmail(values.mail)){
+                
                 bandera = true;
                 if((values.pass != null && values.pass != '') || (values.pass1 != null && values.pass1 != '')){
                   if(values.pass == values.pass1){
@@ -207,6 +209,9 @@ export class ConfiguracionPage implements OnInit {
                 bandera = false;
                 this.co.presentAlert('Error','','Ingrese un email valido');
               }
+              }else{
+                this.co.presentAlert('Error','','La fecha de fin de tratamiento debe ser después de la fecha de inicio');
+              }
             }else{
               bandera = false;
               this.co.presentAlert('Error','','Favor de completar todos los campos');
@@ -231,6 +236,16 @@ export class ConfiguracionPage implements OnInit {
     return serchfind
   }
 
+  validateFechas(inicio,fin):boolean{
+    let first = new Date(inicio);
+    let second = new Date(fin);
+    let full = Math.round((second.getTime()-first.getTime())/(1000*60*60*24));
+    console.log('full is',full);
+    return full <= 0;
+  }
+
+
+ 
 
 
 }

@@ -1,4 +1,4 @@
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { GlobalsService } from '../api/globals.service';
@@ -29,7 +29,7 @@ export class RegisterPage implements OnInit {
     estado: new FormControl(null,Validators.required),
     municipio: new FormControl(null,Validators.required),
     fecha_inicio: new FormControl(null,Validators.required),
-    fecha_fin: new FormControl(null,Validators.required),
+    fecha_fin: new FormControl(null,[Validators.required]),
     condiciones: new FormControl(null,Validators.required)
   });
 
@@ -38,6 +38,7 @@ export class RegisterPage implements OnInit {
   municipio: '';
   estado: '';
   aceptaBand: false;
+  in_fecha_inicio: any;
 
   sexo: any;
   institucion: any;
@@ -91,6 +92,7 @@ export class RegisterPage implements OnInit {
        (values.cp != null && values.cp != '')){       
       if(this.isEmail(values.mail)){
         if(values.pass == values.pass1){
+          if(!this.validateFechas(values.fecha_inicio,values.fecha_fin)){
           if(values.condiciones != null && values.condiciones != false){
             this.global.showLoader();
             var fecha_nac = this.datePipe.transform(values.fecha_nacimiento, 'yyyy-MM-dd');
@@ -127,6 +129,9 @@ export class RegisterPage implements OnInit {
             this.co.presentAlert('Error','','Debes aceptar los Términos y condiciones para poder registrarte');
             this.global.hideLoader();
           }
+         }else{
+          this.co.presentAlert('Error','','La fecha de fin de tratamiento debe ser después de la fecha de inicio');
+         } 
         }else{
           this.co.presentAlert('Error','','Las contraseñas deben coincidir');
         }
@@ -147,6 +152,14 @@ export class RegisterPage implements OnInit {
 
     console.log(serchfind)
     return serchfind
+  }
+
+  validateFechas(inicio,fin):boolean{
+    let first = new Date(inicio);
+    let second = new Date(fin);
+    let full = Math.round((second.getTime()-first.getTime())/(1000*60*60*24));
+    console.log('full is',full);
+    return full <= 0;
   }
 
   segmentChanged(ev: any) {
@@ -172,4 +185,5 @@ export class RegisterPage implements OnInit {
     });
     return await modal.present();
   }
+
 }
