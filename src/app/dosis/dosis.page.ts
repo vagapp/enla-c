@@ -17,6 +17,8 @@ export class DosisPage implements OnInit {
   
   name_head: any;
   date_head: any;
+  date_head_fin: any;
+  date_head_percent: any;
   todayS: any;
   todayF: any;
   dataReturned:any;
@@ -48,7 +50,14 @@ export class DosisPage implements OnInit {
         this.name_head = res.current_user.fullname;
         //this.datePipe.transform()
         this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
-        
+        this.date_head_fin = this.datePipe.transform(res.current_user.fecha_fin_tratamiento,'dd-MM-yyyy');
+        let first = new Date(res.current_user.fecha_inicio_tratamiento);
+        let second = new Date(res.current_user.fecha_fin_tratamiento);
+        let today = new Date();
+        let full = Math.round((second.getTime()-first.getTime())/(1000*60*60*24));
+        let progress = Math.round((today.getTime()-first.getTime())/(1000*60*60*24));
+        this.date_head_percent = Math.ceil((100 * progress) / full);
+        console.log(this.date_head_percent);
       },
       (err: HttpErrorResponse) => { 
         console.log(err);

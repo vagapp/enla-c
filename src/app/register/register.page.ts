@@ -29,6 +29,7 @@ export class RegisterPage implements OnInit {
     estado: new FormControl(null,Validators.required),
     municipio: new FormControl(null,Validators.required),
     fecha_inicio: new FormControl(null,Validators.required),
+    fecha_fin: new FormControl(null,Validators.required),
     condiciones: new FormControl(null,Validators.required)
   });
 
@@ -84,6 +85,7 @@ export class RegisterPage implements OnInit {
        (values.pass1 != null && values.pass1 != '') && 
        (values.fecha_nacimiento != null && values.fecha_nacimiento != '') && 
        (values.fecha_inicio != null && values.fecha_inicio != '') && 
+       (values.fecha_fin != null && values.fecha_fin != '') && 
        (values.institucion != null && values.institucion != '') && 
        (values.sexo != null && values.sexo != '') &&
        (values.cp != null && values.cp != '')){       
@@ -93,8 +95,9 @@ export class RegisterPage implements OnInit {
             this.global.showLoader();
             var fecha_nac = this.datePipe.transform(values.fecha_nacimiento, 'yyyy-MM-dd');
             var fecha_ini = this.datePipe.transform(values.fecha_inicio, 'yyyy-MM-dd');
+            var fecha_fi = this.datePipe.transform(values.fecha_fin, 'yyyy-MM-dd');
             
-            this.US.register(values.name, values.lastname, values.mail, values.pass, fecha_nac, fecha_ini, values.institucion, values.name, values.sexo, values.cp).subscribe(
+            this.US.register(values.name, values.lastname, values.mail, values.pass, fecha_nac, fecha_ini, fecha_fi, values.institucion, values.name, values.sexo, values.cp).subscribe(
               res => { 
                 console.log(res);
                 /****************************************************************************/

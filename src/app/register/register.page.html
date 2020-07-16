@@ -106,6 +106,13 @@
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
+              <ion-item class="ion-item-color-border">
+                <ion-label position="floating" class="label-size">FIN DEL TRATAMIENTO</ion-label>
+                <ion-datetime  formControlName="fecha_fin" ngModel monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
+               
+              </ion-item>
+            </ion-list>
+            <ion-list class="list-height">
               <ion-item class="no-border-item">
                 <br>
                 <ion-checkbox color="danger" class="check-style" formControlName="condiciones" checked="false"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text" (click)="openTermCond(1)">términos de uso</span> y la <span class="secondary-text-big" (click)="openTermCond(2)">política de privacidad</span></p>

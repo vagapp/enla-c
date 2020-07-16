@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CalendarModule } from 'ion2-calendar';
 import { DosisPage } from './dosis.page';
+import { ComponentsModule } from '../components.module';
 //imports: [];
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     CalendarModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [DosisPage]

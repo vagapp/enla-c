@@ -22,6 +22,7 @@ export interface CurrentUser{
   institucion: Array<string>;
   fecha_nacimiento: string;
   fecha_inicio_tratamiento: string;
+  fecha_fin_tratamiento: string;
 }
 
 @Injectable({
@@ -223,7 +224,7 @@ export class UserService {
       );
   }
 
-  register(name:string, lastname:string, mail:string, pass:string, field_fecha_de_nacimiento:string, field_inicio_del_tratamiento:string, field_institucion:string, field_nombre_completo:string, field_sexo:string, field_codigo_postal:string){
+  register(name:string, lastname:string, mail:string, pass:string, field_fecha_de_nacimiento:string, field_inicio_del_tratamiento:string, field_fin_del_tratamiento:string, field_institucion:string, field_nombre_completo:string, field_sexo:string, field_codigo_postal:string){
     
     let headers = new HttpHeaders({
       'Content-Type':  'application/json',
@@ -245,6 +246,7 @@ export class UserService {
       "pass": [{ "value":pass }],
       "field_fecha_de_nacimiento": [{ "value":field_fecha_de_nacimiento }],
       "field_inicio_del_tratamiento": [{ "value":field_inicio_del_tratamiento }],
+      "field_fin_del_tratamiento": [{ "value":field_fin_del_tratamiento }],
       "field_institucion": [{ "target_id":field_institucion }],
       "field_nombre_completo": [{ "value":field_nombre_completo }],
       "field_sexo":sx,
@@ -372,6 +374,7 @@ export class UserService {
         "mail": [{ "value": info.mail }],
         "field_fecha_de_nacimiento": [{ "value": info.field_fecha_de_nacimiento }],
         "field_inicio_del_tratamiento": [{ "value": info.field_inicio_del_tratamiento }],
+        "field_fin_del_tratamiento": [{ "value": info.field_fin_del_tratamiento }],
         "field_institucion": [{ "target_id": info.field_institucion }],
         "field_nombre_completo": [{ "value": info.field_nombre_completo }],
         "field_sexo":sx,
@@ -387,6 +390,7 @@ export class UserService {
         "mail": [{ "value": info.mail }],
         "field_fecha_de_nacimiento": [{ "value": info.field_fecha_de_nacimiento }],
         "field_inicio_del_tratamiento": [{ "value": info.field_inicio_del_tratamiento }],
+        "field_fin_del_tratamiento": [{ "value": info.field_fin_del_tratamiento }],
         "field_institucion": [{ "target_id": info.field_institucion }],
         "field_nombre_completo": [{ "value": info.field_nombre_completo }],
         "field_sexo":sx,

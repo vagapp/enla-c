@@ -27,7 +27,8 @@ export class ConfiguracionPage implements OnInit {
     cp: new FormControl(null,Validators.required),
     estado: new FormControl(null,Validators.required),
     municipio: new FormControl(null,Validators.required),
-    fecha_inicio: new FormControl(null,Validators.required)
+    fecha_inicio: new FormControl(null,Validators.required),
+    fecha_fin: new FormControl(null,Validators.required)
   });
 
   sexosData: any;
@@ -44,6 +45,7 @@ export class ConfiguracionPage implements OnInit {
   in_municipio: any;
   in_estado: any;
   in_fecha_inicio: any;
+  in_fecha_fin: any;
   
 
   constructor(
@@ -94,6 +96,7 @@ export class ConfiguracionPage implements OnInit {
         this.in_fecha_nacimiento = res.current_user.fecha_nacimiento;
         this.in_cp               = res.current_user.codigo_postal;
         this.in_fecha_inicio     = res.current_user.fecha_inicio_tratamiento;
+        this.in_fecha_fin        = res.current_user.fecha_fin_tratamiento;
         this.sexo                = res.current_user.sexo['tid'];
         this.institucion         = res.current_user.institucion['tid'];
         this.searchCP(this.in_cp);
@@ -155,6 +158,7 @@ export class ConfiguracionPage implements OnInit {
               (values.mail != null && values.mail != '') && 
               (values.fecha_nacimiento != null && values.fecha_nacimiento != '') && 
               (values.fecha_inicio != null && values.fecha_inicio != '') && 
+              (values.fecha_fin != null && values.fecha_fin != '') && 
               (values.institucion != null && values.institucion != '') && 
               (values.sexo != null && values.sexo != '') &&
               (values.cp != null && values.cp != '')){
@@ -177,6 +181,7 @@ export class ConfiguracionPage implements OnInit {
                   var news = {'mail': values.mail,
                               'field_fecha_de_nacimiento': this.datePipe.transform(values.fecha_nacimiento, 'yyyy-MM-dd'),
                               'field_inicio_del_tratamiento': this.datePipe.transform(values.fecha_inicio, 'yyyy-MM-dd'),
+                              'field_fin_del_tratamiento': this.datePipe.transform(values.fecha_fin, 'yyyy-MM-dd'),
                               'field_institucion': values.institucion,
                               'field_nombre_completo': values.name,
                               'field_apellidos': values.apellidos,
