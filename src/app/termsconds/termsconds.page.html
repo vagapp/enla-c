@@ -1,12 +1,13 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title *ngIf="US.nodo == 1">Términos de uso</ion-title>
-    <ion-title *ngIf="US.nodo == 2">Política de Privacidad</ion-title>
+  <ion-toolbar class="header-toolbar">
+    <!-- <ion-title *ngIf="US.nodo == 1">Términos de uso</ion-title>
+    <ion-title *ngIf="US.nodo == 2">Política de Privacidad</ion-title> -->
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <img class="enlac-logo" src="../assets/imgs/logo_of.png"  routerLink="/home"> 
   </ion-toolbar>
 </ion-header>
 

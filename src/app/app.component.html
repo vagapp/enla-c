@@ -9,47 +9,51 @@
                             <span class="block font-name center">Aprende +</span>
                         </div>
                     </ion-col>
-                    <ion-col>
-                    </ion-col>
-                </ion-row>
-
-                <ion-row class="borders-bottom">
-                    <ion-col class="border-riight" routerLink="/pruebas" (click)="onClickedOutside($event)">
+                    <ion-col routerLink="/pruebas" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/lab.svg">
-                            <span class="block font-name center">Tus pruebas de laboratorio </span>
-                        </div>
-                    </ion-col>
-                    <ion-col routerLink="/dosis" (click)="onClickedOutside($event)">
-                        <div class="section">
-                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/date.svg">
-                            <span class="block font-name center">Dosis diaria</span>
+                            <span class="block font-name center">Tus pruebas de laboratorio</span>
                         </div>
                     </ion-col>
                 </ion-row>
 
                 <ion-row class="borders-bottom">
-                    <ion-col class="border-riight" routerLink="/alarma" (click)="onClickedOutside($event)">
+                    <ion-col class="border-riight" routerLink="/dosis" (click)="onClickedOutside($event)">
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/date.svg">
+                            <span class="block font-name center">Dosis diaria </span>
+                        </div>
+                    </ion-col>
+                    <ion-col routerLink="/alarma" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/alarm.svg">
                             <span class="block font-name center">Alarma</span>
                         </div>
                     </ion-col>
-                    <ion-col routerLink="/configuracion" (click)="onClickedOutside($event)">
+                </ion-row>
+
+                <ion-row class="borders-bottom">
+                    <ion-col class="border-riight" routerLink="/configuracion" (click)="onClickedOutside($event)">
                         <div class="section">
                             <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/conf.svg">
                             <span class="block font-name center">Configuración</span>
                         </div>
                     </ion-col>
+                    <ion-col (click)="doLogout()">
+                        <div class="section">
+                            <img  class="icon-img marginb10 margin-icon" src="../assets/imgs/x-red.svg">
+                            <span class="block font-name center">Cerrar Sesión</span>
+                        </div>
+                    </ion-col>
                 </ion-row>
-                <ion-row>
+                <!-- <ion-row>
                     <ion-col (click)="doLogout()">
                         <div class="small-longsection topdownbordered margin-pit">
                             <img  class="block x-img marginr10" src="../assets/imgs/x-red.svg" >
                             <span class="block font-name">Cerrar Sesión</span>
                         </div>
                     </ion-col>
-                </ion-row>
+                </ion-row> -->
             </ion-grid>
             <!-- <div class="border-grid-container">
                 <div class="menu-grid border-grid">
