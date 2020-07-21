@@ -28,6 +28,7 @@ export class DosisPage implements OnInit {
   datesOrigin: string[];
   numId: any;
   nid: any;
+  ndose: number = 0;
 
   constructor(
     public US: UserService,
@@ -53,11 +54,12 @@ export class DosisPage implements OnInit {
         this.date_head_fin = this.datePipe.transform(res.current_user.fecha_fin_tratamiento,'dd-MM-yyyy');
         let first = new Date(res.current_user.fecha_inicio_tratamiento);
         let second = new Date(res.current_user.fecha_fin_tratamiento);
-        let today = new Date();
+        /*let today = new Date();
         let full = Math.round((second.getTime()-first.getTime())/(1000*60*60*24));
         let progress = Math.round((today.getTime()-first.getTime())/(1000*60*60*24));
         this.date_head_percent = Math.ceil((100 * progress) / full);
-        console.log(this.date_head_percent);
+        console.log(this.date_head_percent);*/
+        this.date_head_percent = 0;
       },
       (err: HttpErrorResponse) => { 
         console.log(err);
@@ -86,12 +88,10 @@ export class DosisPage implements OnInit {
 
     this.US.loaddosis().subscribe(
       resS => {
-        
         const daysConfig: DayConfig[] = [];
-        
         var count = Object.keys(resS).length;
         var noDosis = this.getDates(new Date(this.US.account.current_user.fecha_inicio_tratamiento), new Date(today));
-        
+        this.date_head_percent =  Math.round((100 * count) / UserService.duracion_tratamiendo * 10) / 10 ;
         for(var j=0; j<noDosis.length; j++){
           var fecha = this.datePipe.transform(noDosis[j], 'yyyy-MM-dd');
           var clase = 'my-day-no'
@@ -101,6 +101,7 @@ export class DosisPage implements OnInit {
               fecha = this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd');
               clase = 'my-day nid_'+resS[i].nid;
               this.nid = resS[i].nid;
+              this.ndose++;
             }
           }
           daysConfig.push({

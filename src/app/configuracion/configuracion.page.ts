@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { GlobalsService } from '../api/globals.service';
 import { CommonService } from '../app/common.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-configuracion',
@@ -46,13 +47,14 @@ export class ConfiguracionPage implements OnInit {
   in_estado: any;
   in_fecha_inicio: any;
   in_fecha_fin: any;
-  
+  initload: boolean = true;  
 
   constructor(
     private US: UserService,
     private datePipe: DatePipe,
     public global: GlobalsService,
-    public co: CommonService
+    public co: CommonService,
+    private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -86,6 +88,7 @@ export class ConfiguracionPage implements OnInit {
   }
 
   loadInformation(){
+    this.initload = true;
     this.US.getLoginStatus().subscribe(
       res => { 
         console.log("3");
@@ -100,8 +103,10 @@ export class ConfiguracionPage implements OnInit {
         this.sexo                = res.current_user.sexo['tid'];
         this.institucion         = res.current_user.institucion['tid'];
         this.searchCP(this.in_cp);
+        this.initload = false;
       },
       (err: HttpErrorResponse) => { 
+        this.initload = false;
         console.log(err);
       }
     );
@@ -244,6 +249,13 @@ export class ConfiguracionPage implements OnInit {
     return full <= 0;
   }
 
+  saverange(){
+    console.log('saverange',this.initload);
+    if(!this.initload){
+    this.in_fecha_fin = this.US.calcularSemanas(this.in_fecha_inicio);
+    this.cdRef.detectChanges();
+    }
+  }
 
  
 

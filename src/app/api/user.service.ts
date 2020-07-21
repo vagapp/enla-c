@@ -30,6 +30,7 @@ export interface CurrentUser{
 })
 
 export class UserService {
+  static duracion_tratamiendo:number = 84;
   public _account:Account;
   private _playerID:string = 'null';
   public _nodo:any = 1;
@@ -427,4 +428,13 @@ export class UserService {
         )
       );
   }
+
+  calcularSemanas(inicio:string):string{
+    console.log('calcularSemanas',inicio);
+    let aux_date = new Date(inicio);
+    aux_date.setDate( aux_date.getDate() + UserService.duracion_tratamiendo);
+    console.log('calcularSemanas',inicio,aux_date,aux_date.toISOString());
+    return aux_date.toISOString();
+  }
+
 }

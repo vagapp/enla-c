@@ -101,14 +101,14 @@
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">INICIO DEL TRATAMIENTO</ion-label>
-                <ion-datetime  formControlName="fecha_inicio" [(ngModel)]="in_fecha_inicio"  ngModel monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
+                <ion-datetime  formControlName="fecha_inicio" [(ngModel)]="in_fecha_inicio" (ngModelChange)="saverange()"  ngModel monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
                 <!-- <ion-input formControlName="fecha_inicio" type="text" ngModel required></ion-input> -->
               </ion-item>
             </ion-list>
             <ion-list class="list-height">
               <ion-item class="ion-item-color-border">
                 <ion-label position="floating" class="label-size">FIN DEL TRATAMIENTO</ion-label>
-                <ion-datetime  formControlName="fecha_fin" monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar" [disabled]="!in_fecha_inicio"></ion-datetime>
+                <ion-datetime  formControlName="fecha_fin"  [(ngModel)]="in_fecha_fin" monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic' doneText="Aceptar" cancelText="Cancelar" disabled></ion-datetime>
                
               </ion-item>
             </ion-list>

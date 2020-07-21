@@ -39,6 +39,7 @@ export class RegisterPage implements OnInit {
   estado: '';
   aceptaBand: false;
   in_fecha_inicio: any;
+  in_fecha_fin:any;
 
   sexo: any;
   institucion: any;
@@ -152,6 +153,11 @@ export class RegisterPage implements OnInit {
 
     console.log(serchfind)
     return serchfind
+  }
+
+  saverange(){
+    console.log('saverange');
+    this.in_fecha_fin = this.US.calcularSemanas(this.in_fecha_inicio);
   }
 
   validateFechas(inicio,fin):boolean{
