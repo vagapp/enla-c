@@ -1,7 +1,7 @@
   <ion-content class="ion-justify-content-center">
     <ion-row class="header-login-register">
       <div class="head-logo">
-        <img src="../assets/imgs/logo_of.png" class="img-head-logo">
+        <!-- <img src="../assets/imgs/logo_of.png" class="img-head-logo"> -->
       </div>
       <ion-segment (ionChange)="segmentChanged($event)">
         <ion-segment-button class="no-borderradius checked" value="register">
@@ -115,7 +115,7 @@
             <ion-list class="list-height">
               <ion-item class="no-border-item">
                 <br>
-                <ion-checkbox color="danger" class="check-style" formControlName="condiciones" checked="false"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text" (click)="openTermCond(1)">términos de uso</span> y la <span class="secondary-text-big" (click)="openTermCond(2)">política de privacidad</span></p>
+                <ion-checkbox color="danger" class="check-style" formControlName="condiciones" checked="false"></ion-checkbox><p class="primary-text">Acepto los <span class="secondary-text" (click)="openTermCond(2)">términos de privacidad de datos</span></p>
               </ion-item>
             </ion-list>
           </div>
