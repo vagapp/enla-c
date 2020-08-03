@@ -121,10 +121,17 @@ export class RegisterPage implements OnInit {
                 //this.co.setRoot('/login');
               },
               (err: HttpErrorResponse) => { 
+                let mensaje = "";
+                if (err.status==422){
+                  mensaje = "El correo electrónico que intentas registrar ya existe en el sistema";
+                }else{
+                  mensaje = err.message;
+                }
+
                 console.log(err);
-                this.co.presentAlert('Error','',err);
+                this.co.presentAlert('Error','',mensaje);
                 this.global.hideLoader();
-              }
+              } 
             );
           }else{
             this.co.presentAlert('Error','','Debes aceptar los Términos y condiciones para poder registrarte');

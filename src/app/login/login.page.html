@@ -1,7 +1,7 @@
   <ion-content class="ion-justify-content-center">
     <ion-row class="header-login-register">
       <div class="head-logo">
-        <img src="../assets/imgs/logo_of.png" class="img-head-logo">
+        <!-- <img src="../assets/imgs/logo_of.png" class="img-head-logo"> -->
       </div>
       <ion-segment (ionChange)="segmentChanged($event)">
         <ion-segment-button class="no-borderradius" value="register">
@@ -39,7 +39,7 @@
       </ion-row>
       <ion-row justify-content-center class="row-bottom">
         <ion-col align-self-center class="align-center-span">
-          <span class="red" (click)="openTermCond(1)">Términos de uso </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="red big" (click)="openTermCond(2)">Política de privacidad</span>
+          <span class="red" (click)="openTermCond(2)">Términos de privacidad de datos</span>
           <br><br>
           <span class="red" (click)="openTermCond(305)">Preguntas Frecuentes</span>
           <br><br>
