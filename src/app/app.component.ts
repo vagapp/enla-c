@@ -199,6 +199,7 @@ export class AppComponent {
       (res:any) => { 
         this.globals.hideLoader();
         this.US.account = res;
+        this.US.removeAuth();
         console.log("respuesta ", res);
         this.onClickedOutside(null);
         this.co.setRoot('/login');

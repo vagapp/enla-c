@@ -17,7 +17,7 @@ import { ModalAlarmConfigPageModule } from './modal-alarm-config/modal-alarm-con
 import { TermscondsPageModule } from './termsconds/termsconds.module';
 import { PasswordPageModule } from './password/password.module';
 import { AlertPageModule } from './alert/alert.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -25,6 +25,9 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { DatePipe } from '@angular/common';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+import { AuthInterceptorService } from './auth-interceptor.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +37,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     IonicModule.forRoot({
       mode: 'ios',
     }),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     ClickOutsideModule,
     ModalAlarmPageModule,
@@ -54,6 +58,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     File,
     FileOpener,
     NativeAudio,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OneSignal    
   ],

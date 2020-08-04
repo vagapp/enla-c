@@ -53,6 +53,7 @@ export class LoginPage implements OnInit {
         console.log("AFTER LOGIN ", res);
         this.global.hideLoader();
         this.US.account = res;
+        this.US.saveAuth(data.email,data.password);
         this.co.setRoot('/home');
         if(this.US.account.temp_login){
           this.co.presentAlert('Inicio de sesión','Haz iniciado sesión con una contraseña temporal, te recomendamos cambiarla.','');

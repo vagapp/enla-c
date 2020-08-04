@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import {GlobalsService} from '../api/globals.service';
+import { Storage } from '@ionic/storage';
 
 export interface Account{
   current_user: CurrentUser;
@@ -35,6 +36,9 @@ export class UserService {
   private _playerID:string = 'null';
   public _nodo:any = 1;
   private _dosisdia: boolean;
+  _user: string;
+  _pass: string;
+  settingsession: any;
 
   get nodo():any{
     return this._nodo;
@@ -69,7 +73,8 @@ export class UserService {
     private http: HttpClient,
     public alertController: AlertController,
     public router: Router,
-    public global : GlobalsService
+    public global : GlobalsService,
+    public storage: Storage
   ) { }
   getLoginStatus(){
     return this.http.get<Account>(this.global.API+'user/me/'+this.playerID+'?_format=json',{ withCredentials: true }).pipe(
@@ -435,6 +440,32 @@ export class UserService {
     aux_date.setDate( aux_date.getDate() + UserService.duracion_tratamiendo);
     console.log('calcularSemanas',inicio,aux_date,aux_date.toISOString());
     return aux_date.toISOString();
+  }
+
+
+  set user(user:string){ this._user = user; }
+  set pass(pass:string){ this._pass = pass; }
+  get pass(){ return this._pass; }
+  get user(){ return this._user; }
+
+  saveAuth(usr,pass){
+    this.user = usr;
+    this.pass = pass;
+    this.storage.set('usr',usr);
+    this.storage.set('pass',pass);
+  }
+  async getAuth(){
+    console.log('getting Auth');
+    await this.storage.get('usr').then( res => this.user = res );
+    await this.storage.get('pass').then( res => this.pass = res );
+    console.log('authb user',this.user);
+    console.log('authb pass',this.pass);
+  }
+  removeAuth(){
+    this.storage.remove('usr');
+    this.storage.remove('pass');
+    this.user = null;
+    this.pass = null;
   }
 
 }

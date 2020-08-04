@@ -107,6 +107,7 @@ export class RegisterPage implements OnInit {
                 this.US.login(values.mail, values.pass).subscribe(
                   res => { 
                     console.log(res);
+                    this.US.saveAuth(values.mail,values.pass);
                     this.global.hideLoader();
                     this.co.setRoot('/home');
                   },
