@@ -55,8 +55,10 @@ export class ModalAlarmPage implements OnInit {
   }
 
   registerAlarm(fecha){
+    console.log('fecha',fecha);
     this.global.showLoader();
     fecha = this.datePipe.transform(fecha,'yyyy-MM-dd');
+    console.log('fecha tramsformada',fecha);
     this.US.registerdosis(this.US.account.current_user.uid, fecha).subscribe(
       res => { 
         if(this.isToday)
