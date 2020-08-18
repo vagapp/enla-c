@@ -88,31 +88,35 @@ export class DosisPage implements OnInit {
 
     this.US.loaddosis().subscribe(
       resS => {
+        console.log('loaddosis res',resS);
         const daysConfig: DayConfig[] = [];
         var count = Object.keys(resS).length;
         var noDosis = this.getDates(new Date(this.US.account.current_user.fecha_inicio_tratamiento), new Date(today));
         this.date_head_percent =  Math.round((100 * count) / UserService.duracion_tratamiendo * 10) / 10 ;
         for(var j=0; j<noDosis.length; j++){
           var fecha = this.datePipe.transform(noDosis[j], 'yyyy-MM-dd');
-          var clase = 'my-day-no'
+          var clase = 'my-day-no';
           for(var i=0; i<count; i++){
             this.datesOrigin.push(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
             if(this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd') == this.datePipe.transform(noDosis[j], 'yyyy-MM-dd')){
               fecha = this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd');
+              console.log('date enter condition',this.datePipe.transform(resS[i].field_fecha_de_dosis, 'yyyy-MM-dd'));
               clase = 'my-day nid_'+resS[i].nid;
               this.nid = resS[i].nid;
               this.ndose++;
             }
           }
           daysConfig.push({
-            date: new Date(fecha+'T00:00:00'),
+            date: new Date(fecha+'T23:50:50'),
             cssClass: clase
           });
         }
+        console.log('todayF',this.todayF);
         this.options = {
+          
           daysConfig,
           from: new Date(this.US.account.current_user.fecha_inicio_tratamiento),
-          to: new Date(this.todayF+'T00:00:00')
+          to: new Date(this.todayF+'T23:50:50')
         };
         
       },
@@ -142,6 +146,7 @@ export class DosisPage implements OnInit {
   }
 
   onEventSelected($event){
+    console.log('eventselected',$event);
     var classId = $event.cssClass;
     classId = classId.replace(/ /g, "");
     if(classId.length>9){
@@ -167,7 +172,7 @@ export class DosisPage implements OnInit {
   }
 
   async openModal(Paramdate, bandera, classId, isToday, ishome) {
-    
+    console.log('openmodal',Paramdate);
     const modal = await this.modalController.create({
       component: ModalAlarmPage,
       cssClass: 'modalCss',

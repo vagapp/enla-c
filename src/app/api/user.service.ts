@@ -168,7 +168,7 @@ export class UserService {
   }
 
   registerdosis(title:string, field_fecha_de_dosis:string){
-    
+    console.log('registerdosis field fecha dosis',field_fecha_de_dosis);
     let headers = new HttpHeaders({
       'Content-Type':  'application/json',
       'X-CSRF-Token': this.account.csrf_token
