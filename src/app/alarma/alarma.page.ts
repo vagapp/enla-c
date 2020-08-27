@@ -34,17 +34,17 @@ export class AlarmaPage implements OnInit {
 
   ngOnInit() {
     this.global.showLoader();
+    this.isNew = false;
     this.US.getLoginStatus().subscribe(
-      res => { 
+      res => {
         this.name_head = res.current_user.fullname;
         this.date_head = this.datePipe.transform(res.current_user.fecha_inicio_tratamiento,'dd-MM-yyyy');
       },
-      (err: HttpErrorResponse) => { 
+      (err: HttpErrorResponse) => {
         console.log(err);
       }
     );
     this.alarmserv.getAalarma().subscribe(result =>{
-      this.global.hideLoader();
       if(result.length > 0){
         this.nid = result[0].nid[0].value;
         this.horaAlarma = result[0].field_hora_alarma[0].value;
@@ -53,6 +53,7 @@ export class AlarmaPage implements OnInit {
       }else{
         this.isNew = true;
       }
+      this.global.hideLoader();
     },(err:HttpErrorResponse) => {
       this.global.hideLoader();
       this.horaAlarma = "00:00";
@@ -64,6 +65,7 @@ export class AlarmaPage implements OnInit {
     this.global.showLoader();
     console.log("NID " + this.nid);
     this.alarmserv.actualizaAlarma(status, this.nid, undefined).subscribe(result =>{
+      console.log('actualizaAlarma res',result);
       this.global.hideLoader();
       this.status = result['field_status'][0].value;
       this.presentToast(status == true ? "Se activo tu alarma": "Se desactivo tu alarma");
@@ -90,6 +92,7 @@ export class AlarmaPage implements OnInit {
   }
 
   async openModal() {
+    if(this.nid !== undefined || this.isNew){
     const modal = await this.modalController.create({
       component: ModalAlarmConfigPage,
       cssClass: 'modalCss',
@@ -104,7 +107,6 @@ export class AlarmaPage implements OnInit {
  
     modal.onDidDismiss().then((dataReturned) => { 
       if(dataReturned.data != undefined){
-        console.log("DATA",dataReturned);
         this.horaAlarma = dataReturned.data.field_hora_alarma[0].value;
         this.status = dataReturned.data.field_status[0].value;
         this.format = this.setAMPM(this.horaAlarma);
@@ -114,5 +116,6 @@ export class AlarmaPage implements OnInit {
     });
     return await modal.present();
   }
+}
 
 }
