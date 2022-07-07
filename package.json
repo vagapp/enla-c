@@ -44,7 +44,7 @@
     "core-js": "^2.5.4",
     "he": "^1.2.0",
     "ion2-calendar": "^3.0.0-rc.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-click-outside": "^5.0.0",
     "onesignal": "^0.1.2",
     "onesignal-cordova-plugin": "2.6.0",
